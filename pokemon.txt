@@ -1,0 +1,142 @@
+POKÉMON (sito immagini bulbapedia)
+
+- Magnezone (elettro-acciaio) 
+	STATISTICHE
+	 HP 70
+	 Attack  70
+	 Defense 115
+	MOSSE  
+	 Scintilla (elettro) danno 6
+	 Cannonflash (acciaio) danno 100
+	 Sprizzalampo (elettro) danno 90
+	 Tuononda (elettro) danno 0 --> PARALIZZA
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/8/86/Spr_6x_462.png
+	 https://archives.bulbagarden.net/media/upload/a/a8/Spr_b_6x_462.png
+	
+- Latios (drago-psico)
+	STATISTICHE
+	 HP 80
+	 Attack  90
+	 Defense 80
+	MOSSE
+	 Dragospiro (drago) danno 6
+	 Cozzata zen (psico) danno 12
+	 Dragartigli (drago) danno 50
+	 Schermoluce (psico) danno 0 --> -40% DANNI(idea: alzare difesa)
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/2/2a/Spr_6x_381.png
+	 https://archives.bulbagarden.net/media/upload/a/a2/Spr_b_6x_381.png
+
+- Giratina (spettro-drago)
+	STATISTICHE
+	 HP 150
+	 Attack  100
+	 Defense 120
+	MOSSE
+	 Dragospiro (drago) danno 6
+	 Oscurotuffo (spettro) danno 120
+	 Ombrartigli (spettro) danno 70
+	 Fuocofatuo (fuoco) danno 5 a turno --> SCOTTA
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/2/23/Spr_6x_487.png
+	 https://archives.bulbagarden.net/media/upload/1/16/Spr_b_6x_487.png
+
+- Electabuzz (elettro)
+	STATISTICHE 
+	 HP 65
+	 Attack  83
+	 Defense 57
+	MOSSE
+	 Tuonoshock (elettro) danno 40
+	 Tuonopugno (elettro) danno 75
+	 Fulmine (elettro) danno 110
+	 Fulmisguardo (normale) danno 0 --> -30% DIFESA  
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/d/da/Spr_6x_125.png
+	 https://archives.bulbagarden.net/media/upload/8/8c/Spr_b_6x_125.png
+
+- Lapras (acqua-ghiaccio)
+	STATISTICHE 
+	 HP 130
+	 Attack  85
+	 Defense 80
+	MOSSE
+	 Pistolacqua (acqua) danno 40
+	 Geloscheggia (ghiaccio) danno 40
+	 Idropompa (acqua) danno 110
+	 Canto (normale) danno 0 --> ADDORMENTA
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/f/f1/Spr_6x_131.png
+	 https://archives.bulbagarden.net/media/upload/5/59/Spr_b_6x_131.png
+
+- Charizard (fuoco-volante)
+	STATISTICHE 
+	 HP 78
+	 Attack  84
+	 Defense 78
+	MOSSE
+	 Lanciafiamme (fuoco) danno 90
+	 Robodenti (fuoco) danno 65
+	 Eterelama (volante) danno 75
+	 Dragodanza (drago) danno 0 --> +20% ATTACCO
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/2/23/Spr_6x_006.png
+	 https://archives.bulbagarden.net/media/upload/3/3b/Spr_b_6x_006.png
+
+- Wailord (acqua)
+	STATISTICHE
+	 HP 170
+	 Attack  90
+	 Defense 45
+	MOSSE
+	 Pistolacqua (acqua) danno 40
+	 IdroPulsar (acqua) danno 60
+	 Mulinello (acqua) danno 35
+	 Amnesia (psico) danno 0 --> DIFESA +40%
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/e/ee/Spr_6x_321.png
+	 https://archives.bulbagarden.net/media/upload/8/8f/Spr_b_6x_321.png
+
+- Golbat (veleno-volante)
+	STATISTICHE
+	 HP 75
+	 Attack  80
+	 Defense 70
+	MOSSE
+	 Velenodenti (veleno) danno 50
+	 Velenoshock (veleno) danno 65
+	 Aerasoio (volante) danno 60
+	 Stridio (normale) danno 0 --> -40% DIFESA
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/a/aa/Spr_6x_042_f.png
+	 https://archives.bulbagarden.net/media/upload/2/28/Spr_b_6x_042_f.png
+
+- Sceptile (erba)
+	STATISTICHE
+	 HP 70
+	 Attack  85
+	 Defense 65
+	MOSSE
+	 Energipalla (erba) danno 90
+	 Fendifoglia (erba) danno 90
+	 Verdebufera (erba) danno 130
+	 Campoerboso (erba) danno -20 --> CURA TUTTI I POKEMON DI 20
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/2/2e/Spr_6x_254.png
+	 https://archives.bulbagarden.net/media/upload/7/7b/Spr_b_6x_254.png
+
+- Mew (psico)
+	STATISTICHE
+	 HP 70
+	 Attack  70
+	 Defense 115
+	MOSSE
+	 Pisichico (psico) danno 90
+	 Nebbioscoppio (folletto) danno 100
+	 Vastemergia (psico) danni 80
+	 Amnesia (psico) danno 0 --> DIFESA +40%
+	IMMAGINI
+	 https://archives.bulbagarden.net/media/upload/d/df/Spr_6x_151.png
+	 https://archives.bulbagarden.net/media/upload/6/64/Spr_b_6x_151.png
+

@@ -26,7 +26,7 @@ Dopo aver stabilito la connesione si invia il pokemon evocato:
 
 FASE DI ATTACCO
   Quando è il proprio turno:
-  -at;nomeMossa;eventualiBonus(separati da "-");
+  -at;nomeMossa;danno;
   //oppure\\
   -og;nomeOggetto; --> usare un oggetto;
   //oppure\\

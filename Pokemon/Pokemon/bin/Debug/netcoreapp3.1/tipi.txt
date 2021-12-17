@@ -1,0 +1,19 @@
+id nome 2x 0.5x 0
+1;normale;;roccia-acciaio;spettro;
+2;lotta;normale-roccia-acciao-ghiaccio-buio;volante-veleno-coleottero-psico-folletto;spettro;
+3;volante;lotta-coleottero-erba;roccia-acciaio-elettro;;
+4;veleno;erba-folletto;veleno-terra-roccia-spettro;acciaio;
+5;terra;veleno-roccia-acciaio-fuoco-elettro;coleottero-erba;volante;
+6;roccia;volante-coleottero-fuoco-ghiaccio;lotta-terra-acciaio;;
+7;coleottero;erba-psico-buio;lotta-volante-veleno-spettro-acciaio-fuoco-folletto;;
+8;spettro;spettro-psico;buio;normale;;
+9;acciaio;roccia-ghiaccio-folletto;acciaio-fuoco-acqua-elettro;;
+10;fuoco;coleottero-acciaio-erba-ghiaccio;roccia-fuoco-acqua-drago;;
+11;acqua;roccia-terra-fuoco;acqua-erba-drago;;
+12;erba;terra-roccia-acqua;volante-veleno-coleottero-acciaio-fuoco-erba-drago;;
+13;elettro;volante-acqua;erba-elettro-drago;terra;
+14;psico;lotta-veleno;acciaio-psico;buio;
+15;ghiaccio;volante-terra-erba-drago;acciaio-fuoco-acqua-ghiaccio;;
+16;drago;drago;acciaio;folletto;
+17;buio;spettro-psico;lotta-buio-folletto;;
+18;folletto;lotta-drago-buio;veleno-acciaio-fuoco;;

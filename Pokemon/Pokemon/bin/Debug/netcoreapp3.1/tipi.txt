@@ -1,4 +1,3 @@
-id nome 2x 0.5x 0
 1;normale;;roccia-acciaio;spettro;
 2;lotta;normale-roccia-acciao-ghiaccio-buio;volante-veleno-coleottero-psico-folletto;spettro;
 3;volante;lotta-coleottero-erba;roccia-acciaio-elettro;;

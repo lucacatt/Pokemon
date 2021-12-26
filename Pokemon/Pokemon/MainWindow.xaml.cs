@@ -23,14 +23,17 @@ namespace Pokemon
         public MainWindow()
         {
             InitializeComponent();
-            var fullFilePath = @"https://archives.bulbagarden.net/media/upload/8/86/Spr_6x_462.png";
+            //var fullFilePath = @"https://archives.bulbagarden.net/media/upload/8/86/Spr_6x_462.png";
 
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-            bitmap.EndInit();
+            //BitmapImage bitmap = new BitmapImage();
+            //bitmap.BeginInit();
+            //bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+            //bitmap.EndInit();
 
-            pkm.Source = bitmap;
+            //pkm.Source = bitmap;
+            Tipi.Instance.leggi(AppDomain.CurrentDomain.BaseDirectory + "tipi.txt");
+            Pokemons p = new Pokemons();
+            p.leggi(AppDomain.CurrentDomain.BaseDirectory + "pokemon.txt");
         }
     }
 }

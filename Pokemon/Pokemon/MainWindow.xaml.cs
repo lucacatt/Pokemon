@@ -20,20 +20,53 @@ namespace Pokemon
     /// </summary>
     public partial class MainWindow : Window
     {
+        int posScelta = 0;
+        Pokemons p = new Pokemons();
         public MainWindow()
         {
             InitializeComponent();
-            //var fullFilePath = @"https://archives.bulbagarden.net/media/upload/8/86/Spr_6x_462.png";
-
-            //BitmapImage bitmap = new BitmapImage();
-            //bitmap.BeginInit();
-            //bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-            //bitmap.EndInit();
-
-            //pkm.Source = bitmap;
             Tipi.Instance.leggi(AppDomain.CurrentDomain.BaseDirectory + "tipi.txt");
-            Pokemons p = new Pokemons();
             p.leggi(AppDomain.CurrentDomain.BaseDirectory + "pokemon.txt");
+            showImg(p.getImg(posScelta));
+        }
+
+        private void btnIdietro_Click(object sender, RoutedEventArgs e)
+        {
+            if (posScelta > 0)
+            {
+                posScelta--;
+                var fullFilePath = p.getImg(posScelta);
+                showImg(fullFilePath);
+            }
+        }
+        private void showImg(string fullFilePath)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+            bitmap.EndInit();
+            pkm.Source = bitmap;
+        }
+
+        private void btnAvanti_Click(object sender, RoutedEventArgs e)
+        {
+            if (posScelta < p.getSize() - 1)
+            {
+                posScelta++;
+                var fullFilePath = p.getImg(posScelta);
+                showImg(fullFilePath);
+            }
+        }
+
+        private void btnSeleziona_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnStats_Click(object sender, RoutedEventArgs e)
+        {
+            Statistiche s = new Statistiche(p.getPkm(posScelta));
+            s.Show();
         }
     }
 }

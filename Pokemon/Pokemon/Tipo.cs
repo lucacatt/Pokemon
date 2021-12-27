@@ -11,6 +11,7 @@ namespace Pokemon
         public List<String> super;
         public List<String> less;
         public List<String> no;
+        public string colore { get; set; }
         public Tipo()
         {
             id = 0;
@@ -18,6 +19,7 @@ namespace Pokemon
             super = new List<string>();
             less = new List<string>();
             no = new List<string>();
+            colore = "";
         }
         public void fromCSV(string csv)
         {
@@ -43,6 +45,7 @@ namespace Pokemon
             {
                 no.Add(temp[4].Split('-')[i]);
             }
+            colore = temp[5];
         }
     }
 }

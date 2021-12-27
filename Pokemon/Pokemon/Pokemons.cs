@@ -8,16 +8,10 @@ namespace Pokemon
     class Pokemons
     {
         private List<Pokem> pokemon { get; set; }
-        private string path;
-        public Pokemons()
-        {
-            pokemon = new List<Pokem>();
-            path = "";
-        }
+        public Pokemons() => pokemon = new List<Pokem>();
 
         public void leggi(string path)
         {
-            this.path = path;
             using (StreamReader sr = File.OpenText(path))
             {
                 string s = "";
@@ -28,6 +22,18 @@ namespace Pokemon
                     pokemon.Add(temp);
                 }
             }
+        }
+        public string getImg(int pos)
+        {
+            return pokemon[pos].imgFront;
+        }
+        public int getSize()
+        {
+            return pokemon.Count;
+        }
+        public Pokem getPkm(int pos)
+        {
+            return pokemon[pos];
         }
     }
 }

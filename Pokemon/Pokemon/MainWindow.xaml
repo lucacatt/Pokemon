@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
     <Grid>
-        <Image x:Name="pkm" Grid.Column="1" HorizontalAlignment="Left" Height="318" Margin="132,10,0,0" VerticalAlignment="Top" Width="516"/>
+        <Image x:Name="pkm" HorizontalAlignment="Left" Height="318" Margin="178,44,0,0" VerticalAlignment="Top" Width="408"/>
         <Label Content="Squadra" Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="34" Width="70"/>
-        <Button x:Name="btnIdietro" Content="Indietro" Grid.Column="1" HorizontalAlignment="Left" Margin="132,404,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnSeleziona" Content="Seleziona" Grid.Column="1" HorizontalAlignment="Left" Margin="370,404,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnAvanti" Content="Avanti" Grid.Column="1" HorizontalAlignment="Left" Margin="611,404,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnIdietro" Content="Indietro" Grid.Column="1" HorizontalAlignment="Left" Margin="132,404,0,0" VerticalAlignment="Top" Click="btnIdietro_Click"/>
+        <Button x:Name="btnSeleziona" Content="Seleziona" HorizontalAlignment="Left" Margin="267,404,0,0" VerticalAlignment="Top" Click="btnSeleziona_Click"/>
+        <Button x:Name="btnAvanti" Content="Avanti" HorizontalAlignment="Left" Margin="598,404,0,0" VerticalAlignment="Top" Click="btnAvanti_Click"/>
+        <Button x:Name="btnStats" Content="Vedi statistiche" HorizontalAlignment="Left" Margin="405,404,0,0" VerticalAlignment="Top" Click="btnStats_Click"/>
     </Grid>
 </Window>

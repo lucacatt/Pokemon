@@ -22,6 +22,7 @@ namespace Pokemon
     {
         int posScelta = 0;
         Pokemons p = new Pokemons();
+        Pokemons pScelti = new Pokemons();
         public MainWindow()
         {
             InitializeComponent();
@@ -60,13 +61,29 @@ namespace Pokemon
 
         private void btnSeleziona_Click(object sender, RoutedEventArgs e)
         {
-
+            if (pScelti.getPokems().Count < 6)
+            {
+                pScelti.addPkm(p.getPkm(posScelta));
+                lb.Items.Add(p.getPkm(posScelta).Nome);
+            }
+            else
+                MessageBox.Show("Squadra al completo");
         }
 
         private void btnStats_Click(object sender, RoutedEventArgs e)
         {
             Statistiche s = new Statistiche(p.getPkm(posScelta));
             s.Show();
+        }
+
+        private void btnRimuovi_Click(object sender, RoutedEventArgs e)
+        {
+            lb.Items.Remove(lb.SelectedItem);
+        }
+
+        private void btnLotta_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

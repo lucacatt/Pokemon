@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Pokemon
 {
-    class Pokemons
+    public class Pokemons
     {
         private List<Pokem> pokemon { get; set; }
         public Pokemons() => pokemon = new List<Pokem>();
@@ -34,6 +34,19 @@ namespace Pokemon
         public Pokem getPkm(int pos)
         {
             return pokemon[pos];
+        }
+
+        public void addPkm(Pokem pokem)
+        {
+            pokemon.Add(pokem);
+        }
+        public List<Pokem> getPokems()
+        {
+            return pokemon;
+        }
+        public void setPokems(List<Pokem> p)
+        {
+            pokemon = p;
         }
     }
 }

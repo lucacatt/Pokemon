@@ -29,9 +29,9 @@ namespace Pokemon
         {
             string[] temp = csv.Split(';');
             Nome = temp[0];
-            for (int i = 0; i < temp[1].Split('-').Length; i++)
+            for (int i = 0; i < temp[1].Split('/').Length; i++)
             {
-                Tipo.Add(Tipi.Instance.getTipo(temp[1].Split('-')[i]));
+                Tipo.Add(Tipi.Instance.getTipo(temp[1].Split('/')[i]));
             }
             Hp = Convert.ToInt32(temp[2]);
             Atk = Convert.ToInt32(temp[3]);

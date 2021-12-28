@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokemon"
         mc:Ignorable="d"
-        Title="Statistiche" Height="450" Width="800">
+        Title="Statistiche" Height="486" Width="800">
     <Grid>
         <Label x:Name="lblnome" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="42" Width="217" FontWeight="Bold" FontSize="20"/>
         <Label Content="HP" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black"/>
@@ -14,6 +14,28 @@
         <Label x:Name="lblHp" Content="Label" HorizontalAlignment="Left" Margin="81,57,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblAtk" Content="Label" HorizontalAlignment="Left" Margin="81,88,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblDf" Content="Label" HorizontalAlignment="Left" Margin="81,119,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTipo" Content="" HorizontalAlignment="Left" Margin="232,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label x:Name="lblTipo2" Content="" HorizontalAlignment="Left" Margin="348,18,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Rectangle x:Name="mossa1" HorizontalAlignment="Left" Height="122" Margin="57,169,0,0" Stroke="Black" VerticalAlignment="Top" Width="248"/>
+        <Rectangle x:Name="mossa3" HorizontalAlignment="Left" Height="122" Margin="57,296,0,0" Stroke="Black" VerticalAlignment="Top" Width="248"/>
+        <Rectangle x:Name="mossa2" HorizontalAlignment="Left" Height="122" Margin="494,169,0,0" Stroke="Black" VerticalAlignment="Top" Width="248"/>
+        <Rectangle x:Name="mossa4" HorizontalAlignment="Left" Height="122" Margin="494,302,0,0" Stroke="Black" VerticalAlignment="Top" Width="248" RadiusX="0.498" RadiusY="0.498"/>
+        <Label x:Name="n1" Content="Label" HorizontalAlignment="Left" Margin="152,169,0,0" VerticalAlignment="Top" Width="85" FontWeight="Bold"/>
+        <Label x:Name="n3" Content="Label" HorizontalAlignment="Left" Margin="152,302,0,0" VerticalAlignment="Top" Width="85" FontWeight="Bold"/>
+        <Label x:Name="n2" Content="Label" HorizontalAlignment="Left" Margin="589,177,0,0" VerticalAlignment="Top" Width="85" FontWeight="Bold"/>
+        <Label x:Name="n4" Content="Label" HorizontalAlignment="Left" Margin="589,310,0,0" VerticalAlignment="Top" Width="85" FontWeight="Bold"/>
+        <Label x:Name="lbltipom1" Content="Tipo:" HorizontalAlignment="Left" Margin="62,209,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbltipom2" Content="Tipo:" HorizontalAlignment="Left" Margin="503,209,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbltipom3" Content="Tipo:" HorizontalAlignment="Left" Margin="63,339,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbltipom4" Content="Tipo:" HorizontalAlignment="Left" Margin="503,339,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="d1" Content="Danno: " HorizontalAlignment="Left" Margin="62,235,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="d3" Content="Danno: " HorizontalAlignment="Left" Margin="62,362,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="d2" Content="Danno: " HorizontalAlignment="Left" Margin="503,235,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="d4" Content="Danno: " HorizontalAlignment="Left" Margin="503,362,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="e1" Content="Effetto: " HorizontalAlignment="Left" Margin="63,261,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="e3" Content="Effetto: " HorizontalAlignment="Left" Margin="63,386,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="e2" Content="Effetto: " HorizontalAlignment="Left" Margin="503,261,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="e4" Content="Effetto: " HorizontalAlignment="Left" Margin="503,386,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
 5;terra;veleno-roccia-acciaio-fuoco-elettro;coleottero-erba;volante;Brown;
 6;roccia;volante-coleottero-fuoco-ghiaccio;lotta-terra-acciaio;;SaddleBrown;
 7;coleottero;erba-psico-buio;lotta-volante-veleno-spettro-acciaio-fuoco-folletto;;LightGreen;
-8;spettro;spettro-psico;buio;normale;;MediumPurple;
+8;spettro;spettro-psico;buio;normale;MediumPurple;
 9;acciaio;roccia-ghiaccio-folletto;acciaio-fuoco-acqua-elettro;;DimGray;
 10;fuoco;coleottero-acciaio-erba-ghiaccio;roccia-fuoco-acqua-drago;;Red;
 11;acqua;roccia-terra-fuoco;acqua-erba-drago;;CornflowerBlue;

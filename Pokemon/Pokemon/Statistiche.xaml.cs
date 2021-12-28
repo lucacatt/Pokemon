@@ -23,14 +23,46 @@ namespace Pokemon
         }
         public Statistiche(Pokem pokemon)
         {
-            //string a = "Yellow";
             InitializeComponent();
             lblnome.Content = pokemon.Nome.ToUpper();
             lblAtk.Content = pokemon.Atk;
             lblDf.Content = pokemon.Def;
             lblHp.Content = pokemon.Hp;
-            //lblHp.BorderThickness= new Thickness(3, 3, 3, 3);
-            //lblHp.BorderBrush = new BrushConverter().ConvertFromString(a) as SolidColorBrush; ;
+            lblTipo.Content = pokemon.Tipo[0].nome.ToUpper();
+            if (pokemon.Tipo[0].nome == "buio")
+            {
+                lblTipo.Foreground = Brushes.White;
+            }
+            else if (pokemon.Tipo[1].nome == "buio")
+            {
+                lblTipo2.Foreground = Brushes.White;
+            }
+            lblTipo.Background = new BrushConverter().ConvertFromString(pokemon.Tipo[0].colore) as SolidColorBrush; ;
+            if (pokemon.Tipo.Count == 2)
+            {
+                lblTipo2.Content = pokemon.Tipo[1].nome.ToUpper();
+                lblTipo2.Background = new BrushConverter().ConvertFromString(pokemon.Tipo[1].colore) as SolidColorBrush; ;
+            }
+            mossa1.Fill = new BrushConverter().ConvertFromString(pokemon.Mosse[0].tipo.colore) as SolidColorBrush; ;
+            mossa2.Fill = new BrushConverter().ConvertFromString(pokemon.Mosse[1].tipo.colore) as SolidColorBrush; ;
+            mossa3.Fill = new BrushConverter().ConvertFromString(pokemon.Mosse[2].tipo.colore) as SolidColorBrush; ;
+            mossa4.Fill = new BrushConverter().ConvertFromString(pokemon.Mosse[3].tipo.colore) as SolidColorBrush; ;
+            n1.Content = pokemon.Mosse[0].nome;
+            n2.Content = pokemon.Mosse[1].nome;
+            n3.Content = pokemon.Mosse[2].nome;
+            n4.Content = pokemon.Mosse[3].nome;
+            lbltipom1.Content = pokemon.Mosse[0].tipo.nome;
+            lbltipom2.Content = pokemon.Mosse[1].tipo.nome;
+            lbltipom3.Content = pokemon.Mosse[2].tipo.nome;
+            lbltipom4.Content = pokemon.Mosse[3].tipo.nome;
+            d1.Content = pokemon.Mosse[0].danno;
+            d2.Content = pokemon.Mosse[1].danno;
+            d3.Content = pokemon.Mosse[2].danno;
+            d4.Content = pokemon.Mosse[3].danno;
+            e1.Content = pokemon.Mosse[0].effetto;
+            e2.Content = pokemon.Mosse[1].effetto;
+            e3.Content = pokemon.Mosse[2].effetto;
+            e4.Content = pokemon.Mosse[3].effetto;
         }
     }
 }

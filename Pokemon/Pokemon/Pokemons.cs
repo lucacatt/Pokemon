@@ -40,6 +40,12 @@ namespace Pokemon
         {
             pokemon.Add(pokem);
         }
+
+        public void remove_pokemon(int pos)
+        {
+            pokemon.RemoveAt(pos);
+        }
+
         public List<Pokem> getPokems()
         {
             return pokemon;

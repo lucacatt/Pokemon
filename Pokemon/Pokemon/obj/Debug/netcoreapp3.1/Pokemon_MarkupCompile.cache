@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-L:\Github\Pokemon\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\
+E:\POKEMON SHOWDOWN\Pokemon-main\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\
 Pokemon
 none
 false
-TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-L:\Github\Pokemon\Pokemon\Pokemon\App.xaml
-2962906993
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
+E:\POKEMON SHOWDOWN\Pokemon-main\Pokemon\Pokemon\App.xaml
+4-1128265245
 
-9-103485457
-192-1533232326
-MainWindow.xaml;Statistiche.xaml;
+121316237067
+1921654412462
+Connessione.xaml;MainWindow.xaml;Mostra_Squadra.xaml;Statistiche.xaml;
 
 False
 

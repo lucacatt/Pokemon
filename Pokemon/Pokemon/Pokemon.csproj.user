@@ -10,6 +10,9 @@
     <Compile Update="Connessione.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Mostra_Squadra.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Statistiche.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,6 +22,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Mostra_Squadra.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Statistiche.xaml">

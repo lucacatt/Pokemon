@@ -1,20 +1,117 @@
 ﻿<Window x:Class="Pokemon.MainWindow"
+        ResizeMode="NoResize"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokemon"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="523" Width="824">
     <Grid>
-        <Image x:Name="pkm" HorizontalAlignment="Left" Height="318" Margin="193,44,0,0" VerticalAlignment="Top" Width="408"/>
-        <Label Content="Squadra" Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="34" Width="70"/>
-        <Button x:Name="btnIdietro" Content="Indietro" HorizontalAlignment="Left" Margin="193,404,0,0" VerticalAlignment="Top" Click="btnIdietro_Click"/>
-        <Button x:Name="btnSeleziona" Content="Seleziona" HorizontalAlignment="Left" Margin="267,404,0,0" VerticalAlignment="Top" Click="btnSeleziona_Click"/>
-        <Button x:Name="btnAvanti" Content="Avanti" HorizontalAlignment="Left" Margin="598,404,0,0" VerticalAlignment="Top" Click="btnAvanti_Click"/>
-        <Button x:Name="btnStats" Content="Vedi statistiche" HorizontalAlignment="Left" Margin="405,404,0,0" VerticalAlignment="Top" Click="btnStats_Click"/>
-        <ListBox x:Name="lb" Margin="8,44,607,145"/>
-        <Button x:Name="btnRimuovi" Content="Rimuovi dalla squadra" HorizontalAlignment="Left" Margin="10,404,0,0" VerticalAlignment="Top" Width="155" Click="btnRimuovi_Click"/>
-        <Button x:Name="btnLotta" Content="Inizia la lotta" HorizontalAlignment="Center" Margin="0,454,0,0" VerticalAlignment="Top" Width="93" Click="btnLotta_Click"/>
+        <Image x:Name="pkm" HorizontalAlignment="Left" Height="294" Margin="67,115,0,0" VerticalAlignment="Top" Width="402"/>
+        <Label Content="Squadra" HorizontalAlignment="Left" Margin="680,29,0,0" VerticalAlignment="Top" Height="34" Width="56"/>
+        <Button x:Name="btnIdietro" Content="" HorizontalAlignment="Left" Margin="67,409,0,0" VerticalAlignment="Top" Click="btnIdietro_Click" Height="50" Width="75" BorderBrush="{x:Null}" Background="White" BorderThickness="0,0,0,0" Cursor="Hand">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="btnSeleziona" Content="" HorizontalAlignment="Left" Margin="161,401,0,0" VerticalAlignment="Top" Click="btnSeleziona_Click" Height="66" Width="215" Background="White" BorderThickness="0,0,0,0" Cursor="Hand">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="btnAvanti" Content="" HorizontalAlignment="Left" Margin="394,409,0,0" VerticalAlignment="Top" Click="btnAvanti_Click" Height="50" Width="75" Background="#FFFFFCFC" BorderThickness="0,0,0,0" Cursor="Hand">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="btnStats" Content="" HorizontalAlignment="Left" Margin="206,92,0,0" VerticalAlignment="Top" Click="btnStats_Click" BorderThickness="0,0,0,0" Width="124" Height="30" Cursor="Hand">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="btnRimuovi" Content="Rimuovi dalla squadra" HorizontalAlignment="Left" Margin="628,239,0,0" VerticalAlignment="Top" Width="154" Click="btnRimuovi_Click" Visibility="Visible" Cursor="Hand"/>
+        <Button x:Name="btnLotta" Content="" HorizontalAlignment="Left" Margin="640,398,0,0" VerticalAlignment="Top" Width="136" Click="btnLotta_Click" Height="70" Cursor="Hand">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Label x:Name="lbl_nome_pkm" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="67,13,0,0" VerticalAlignment="Top" Width="402" FontSize="40" FontWeight="Bold"/>
+        <ListBox x:Name="lb" HorizontalAlignment="Left" Height="171" Margin="611,57,0,0" VerticalAlignment="Top" Width="189"/>
     </Grid>
 </Window>

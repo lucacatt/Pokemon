@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokemon"
         mc:Ignorable="d"
-        Title="MainWindow" Height="523" Width="824">
+        Title="Scegli il tuo Pokémon" Height="523" Width="824">
     <Grid>
         <Image x:Name="pkm" HorizontalAlignment="Left" Height="294" Margin="67,115,0,0" VerticalAlignment="Top" Width="402"/>
         <Label Content="Squadra" HorizontalAlignment="Left" Margin="680,29,0,0" VerticalAlignment="Top" Height="34" Width="56"/>

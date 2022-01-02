@@ -4,15 +4,16 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Windows;
 
 namespace Pokemon
 {
     class comunicazione
     {
-
+        condivisa c;
         public comunicazione()
         {
-
+            c = new condivisa();
         }
 
         public void send_packet(string action, string message)
@@ -35,11 +36,88 @@ namespace Pokemon
         {
             UdpClient listener = new UdpClient(12345);
             IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
-            while (true)
+            while (c.Received_message == "")
             {
                 byte[] dataReceived = listener.Receive(ref riceveEP);
-                string messaggio_ricevuto = Encoding.ASCII.GetString(dataReceived);
+                c.Received_message = Encoding.ASCII.GetString(dataReceived);
+                message_control();
                 //esegui.PacketContent_control(messaggio_ricevuto);
+            }
+            //MessageBox.Show(c.Received_message);
+            
+        }
+
+        public void message_control()
+        {
+            string[] splitted_message = c.Received_message.Split(";");
+            string name = "";
+            if (splitted_message[1] != "")
+            {
+                name = splitted_message[1];
+            }
+            if (splitted_message[0] == "a")
+            {
+                // message box --> accetta richiesta si/no
+
+                c.Received_message = "";
+                if (MessageBox.Show("Accettare la richiesta di gioco da " + name + "?", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    //invia y
+                    send_packet("y", "user"); // da vedere nome!!
+                }
+                else
+                {
+                    // invia n
+                    send_packet("n", "");
+                }
+            }
+            else if (splitted_message[0] == "y" && name != "")
+            {
+                // message box --> sicuro? 
+                // invia y
+                c.Received_message = "";
+                name = splitted_message[1];
+                if (MessageBox.Show("Vuoi davvero accedere al gioco contro " + name + "?", "Accedere?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    //invia y
+                    send_packet("y", ""); // da vedere nome!!
+                }
+                else
+                {
+                    // invia n
+                    send_packet("n", "");
+                }
+            }
+            else if (splitted_message[0] == "y")
+            {
+                c.Received_message = "";
+                MessageBox.Show("Connessione con " + name + "stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (splitted_message[0] == "n")
+            {
+                // chiude
+                c.Received_message = "";
+            }
+            else if (splitted_message[0] == "p")
+            {
+                // pokemon evocato dall'altro giocatore (nome, vita rimanente)
+                // pokemon rimanenti (numero/nomi?)
+                c.Received_message = "";
+            }
+            else if (splitted_message[0] == "at")
+            {
+                // attacco (nome mossa, danno, effetto)
+                c.Received_message = "";
+            }
+            else if (splitted_message[0] == "og")
+            {
+                // oggetto (nome oggetto)
+                c.Received_message = "";
+            }
+            else if (splitted_message[0] == "c")
+            {
+                // chiusura partita esce vinto/perso
+                c.Received_message = "";
             }
         }
 

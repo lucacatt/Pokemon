@@ -143,8 +143,9 @@ namespace Pokemon
             }
             else
             {
-                MessageBox.Show("LOTTA");
-                //c.send_packet("a", txt_nome.Text);
+                //MessageBox.Show("LOTTA");
+                c.send_packet("a", txt_nome.Text);
+                c.start_thread_listen();
             }
 
         }

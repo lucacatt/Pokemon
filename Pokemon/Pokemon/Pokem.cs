@@ -25,6 +25,12 @@ namespace Pokemon
             imgFront = "";
             imgBack = "";
         }
+
+        public Mossa getMossa(int pos)
+        {
+            return Mosse[pos];
+        }
+
         public void fromCSV(string csv)
         {
             string[] temp = csv.Split(';');

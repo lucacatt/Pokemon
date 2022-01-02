@@ -19,11 +19,13 @@ namespace Pokemon
     {
         Pokemons pScelti;
         comunicazione c;
+        public static Pokemons pScelti_per_lotta;
 
         public Mostra_Squadra(Pokemons pScelti)
         {
             InitializeComponent();
             this.pScelti = pScelti;
+            pScelti_per_lotta = pScelti;
             c = new comunicazione();
 
             set_scenery();
@@ -143,7 +145,6 @@ namespace Pokemon
             }
             else
             {
-                //MessageBox.Show("LOTTA");
                 c.send_packet("a", txt_nome.Text);
                 c.start_thread_listen();
             }

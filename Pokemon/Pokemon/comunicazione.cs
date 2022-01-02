@@ -41,26 +41,23 @@ namespace Pokemon
                 byte[] dataReceived = listener.Receive(ref riceveEP);
                 c.Received_message = Encoding.ASCII.GetString(dataReceived);
                 message_control();
-                //esegui.PacketContent_control(messaggio_ricevuto);
             }
-            //MessageBox.Show(c.Received_message);
-            
+
         }
 
         public void message_control()
         {
             string[] splitted_message = c.Received_message.Split(";");
-            string name = "";
             if (splitted_message[1] != "")
             {
-                name = splitted_message[1];
+                c.Opponent = splitted_message[1];
             }
             if (splitted_message[0] == "a")
             {
                 // message box --> accetta richiesta si/no
 
                 c.Received_message = "";
-                if (MessageBox.Show("Accettare la richiesta di gioco da " + name + "?", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Accettare la richiesta di gioco da " + c.Opponent + "?", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     //invia y
                     send_packet("y", "user"); // da vedere nome!!
@@ -71,13 +68,12 @@ namespace Pokemon
                     send_packet("n", "");
                 }
             }
-            else if (splitted_message[0] == "y" && name != "")
+            else if (splitted_message[0] == "y" && splitted_message[1] != "")
             {
                 // message box --> sicuro? 
                 // invia y
                 c.Received_message = "";
-                name = splitted_message[1];
-                if (MessageBox.Show("Vuoi davvero accedere al gioco contro " + name + "?", "Accedere?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Vuoi davvero accedere al gioco contro " + c.Opponent + "?", "Accedere?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     //invia y
                     send_packet("y", ""); // da vedere nome!!
@@ -91,7 +87,12 @@ namespace Pokemon
             else if (splitted_message[0] == "y")
             {
                 c.Received_message = "";
-                MessageBox.Show("Connessione con " + name + "stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    Lotta l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
+                    l.Show();
+                }));
             }
             else if (splitted_message[0] == "n")
             {

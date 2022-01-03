@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Pokemon
@@ -9,6 +10,7 @@ namespace Pokemon
         public string Nome { get; set; }
         public List<Tipo> Tipo { get; set; }
         public int Hp { get; set; }
+        public int remHp { get; set; }
         public int Atk { get; set; }
         public int Def { get; set; }
         public List<Mossa> Mosse { get; set; }
@@ -26,6 +28,33 @@ namespace Pokemon
             imgBack = "";
         }
 
+        public Pokem(string nome, int hp)
+        {
+
+            string path = AppDomain.CurrentDomain.BaseDirectory + "pokemon.txt";
+            Nome = nome;
+            remHp = hp;
+            using (StreamReader sr = File.OpenText(path))
+            {
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
+                {
+                    Pokem temp = new Pokem();
+                    temp.fromCSV(s);
+                    if (temp.Nome == nome)
+                    {
+                        imgFront = temp.imgFront;
+                        Hp = temp.Hp;
+                    }
+                }
+            }
+            Atk = 0;
+            Def = 0;
+            Tipo = new List<Tipo>();
+            Mosse = new List<Mossa>();
+            imgBack = "";
+        }
+
         public Mossa getMossa(int pos)
         {
             return Mosse[pos];
@@ -40,6 +69,7 @@ namespace Pokemon
                 Tipo.Add(Tipi.Instance.getTipo(temp[1].Split('/')[i]));
             }
             Hp = Convert.ToInt32(temp[2]);
+            remHp = Hp;
             Atk = Convert.ToInt32(temp[3]);
             Def = Convert.ToInt32(temp[4]);
             for (int i = 0; i < temp[5].Split('/').Length - 1; i++)

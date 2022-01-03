@@ -11,9 +11,11 @@ namespace Pokemon
     class comunicazione
     {
         condivisa c;
+        Lotta l;
         public comunicazione()
         {
             c = new condivisa();
+            l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
         }
 
         public void send_packet(string action, string message)
@@ -90,7 +92,6 @@ namespace Pokemon
                 MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
-                    Lotta l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
                     l.Show();
                 }));
             }
@@ -102,8 +103,13 @@ namespace Pokemon
             else if (splitted_message[0] == "p")
             {
                 // pokemon evocato dall'altro giocatore (nome, vita rimanente)
-                // pokemon rimanenti (numero/nomi?)
+                // pokemon rimanenti (numero)
                 c.Received_message = "";
+                string pkm_name = splitted_message[1];
+                int hp_pkm = Convert.ToInt32(splitted_message[2]);
+                int pkm_remained = Convert.ToInt32(splitted_message[3]);
+                Pokem pkm_opp = new Pokem(pkm_name, hp_pkm);
+                l.pkm_opp_received(pkm_opp, pkm_remained);
             }
             else if (splitted_message[0] == "at")
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Pokemon
 {
@@ -19,6 +21,7 @@ namespace Pokemon
     {
         Pokemons pScelti;
         List<Mossa> mosse;
+        Pokem pkm_opp;
 
         public Lotta(Pokemons pScelti)
         {
@@ -28,6 +31,31 @@ namespace Pokemon
             set_listbox();
             set_scenery();
         }
+
+        public void pkm_opp_received(Pokem pkm_opp, int pkm_remained)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                try
+                {
+                    this.pkm_opp = pkm_opp;
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(pkm_opp.imgFront, UriKind.Absolute);
+                    bitmap.EndInit();
+                    img_pkm_opp.Stretch = Stretch.Fill;
+                    img_pkm_opp.StretchDirection = StretchDirection.Both;
+                    img_pkm_opp.Source = bitmap;
+                    prg_hp_pkm_opp.Maximum = pkm_opp.Hp;
+                    prg_hp_pkm_opp.Value = pkm_opp.remHp;
+                }
+                catch
+                {
+                    MessageBox.Show("Something went wrong... try again!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }));
+        }
+
 
         private void set_listbox()
         {
@@ -63,10 +91,11 @@ namespace Pokemon
         {
             lb_mosse.Items.Clear();
             img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'f');
-            img_pkm_opp.Source = set_pkm_image(lb_squadra.SelectedIndex, 'f');
             lbl_hp_pkm.Content = pScelti.getPkm(lb_squadra.SelectedIndex).Hp;
             lbl_atk_pkm.Content = pScelti.getPkm(lb_squadra.SelectedIndex).Atk;
             lbl_df_pkm.Content = pScelti.getPkm(lb_squadra.SelectedIndex).Def;
+            prg_hp_pkm.Maximum = pScelti.getPkm(lb_squadra.SelectedIndex).Hp;
+            prg_hp_pkm.Value = pScelti.getPkm(lb_squadra.SelectedIndex).remHp;
             mosse = pScelti.getPkm(lb_squadra.SelectedIndex).Mosse;
             for (int i = 0; i < pScelti.getPkm(lb_squadra.SelectedIndex).Mosse.Count; i++)
             {

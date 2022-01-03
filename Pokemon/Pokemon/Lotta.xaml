@@ -64,9 +64,13 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Label Content="LUCA" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="41" Margin="298,4,0,0" VerticalAlignment="Top" Width="284" FontSize="18" FontWeight="Bold"/>
+        <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="41" Margin="298,4,0,0" VerticalAlignment="Top" Width="284" FontSize="18" FontWeight="Bold"/>
         <Image x:Name="background" HorizontalAlignment="Left" Height="485" Margin="26,45,0,0" VerticalAlignment="Top" Width="824"/>
         <Image x:Name="img_pkm" HorizontalAlignment="Left" Height="310" Margin="144,194,0,0" VerticalAlignment="Top" Width="310"/>
         <Image x:Name="img_pkm_opp" HorizontalAlignment="Left" Height="310" Margin="464,66,0,0" VerticalAlignment="Top" Width="310"/>
+        <ProgressBar x:Name="prg_hp_pkm_opp" HorizontalAlignment="Left" Height="11" Margin="529,120,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
+        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="529,118,0,0" VerticalAlignment="Top" Width="180"/>
+        <ProgressBar x:Name="prg_hp_pkm" HorizontalAlignment="Left" Height="11" Margin="211,461,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
+        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="211,460,0,0" VerticalAlignment="Top" Width="180"/>
     </Grid>
 </Window>

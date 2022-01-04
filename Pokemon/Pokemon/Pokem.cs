@@ -81,5 +81,10 @@ namespace Pokemon
             imgFront = temp[6];
             imgBack = temp[7];
         }
+
+        internal string toCSV()
+        {
+            return Nome + ";" + Hp + ";" + imgBack + ";";
+        }
     }
 }

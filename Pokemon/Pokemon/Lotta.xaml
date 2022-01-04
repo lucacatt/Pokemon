@@ -44,7 +44,7 @@
         <Label x:Name="lbl_tipo" Content="" HorizontalAlignment="Left" Margin="723,584,0,0" VerticalAlignment="Top" Width="175" Height="41" FontSize="18"/>
         <Label x:Name="lbl_danno" Content="" HorizontalAlignment="Left" Margin="723,633,0,0" VerticalAlignment="Top" Width="175" Height="42" FontSize="18"/>
         <Label x:Name="lbl_effetto" Content="" HorizontalAlignment="Left" Margin="723,682,0,0" VerticalAlignment="Top" Width="175" Height="43" FontSize="18"/>
-        <Button x:Name="btn_usa" Content="" HorizontalAlignment="Left" Height="71" Margin="945,619,0,0" VerticalAlignment="Top" Width="169" Cursor="Hand">
+        <Button x:Name="btn_usa" Content="" HorizontalAlignment="Left" Height="71" Margin="945,619,0,0" VerticalAlignment="Top" Width="169" Cursor="Hand" Click="btn_usa_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -72,5 +72,7 @@
         <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="529,118,0,0" VerticalAlignment="Top" Width="180"/>
         <ProgressBar x:Name="prg_hp_pkm" HorizontalAlignment="Left" Height="11" Margin="211,461,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
         <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="211,460,0,0" VerticalAlignment="Top" Width="180"/>
+        <ProgressBar x:Name="vAvv" HorizontalAlignment="Left" Height="10" Margin="211,115,0,0" VerticalAlignment="Top" Width="100"/>
+        <ProgressBar x:Name="vSc" HorizontalAlignment="Left" Height="10" Margin="609,461,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

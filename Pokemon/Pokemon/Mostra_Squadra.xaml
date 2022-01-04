@@ -63,8 +63,6 @@
         <Rectangle HorizontalAlignment="Left" Height="396" Margin="227,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="203"/>
         <Rectangle HorizontalAlignment="Left" Height="396" Margin="24,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="203"/>
         <Label x:Name="lbl_info" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="62" Margin="430,13,0,0" VerticalAlignment="Top" Width="406" FontSize="36" FontWeight="Bold"/>
-        <TextBox x:Name="txt_nome" HorizontalAlignment="Left" Height="47" Margin="844,581,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="258" FontSize="24"/>
-        <Label x:Name="lbl_nome_player" Content="Inserisci il tuo nome per giocare" HorizontalAlignment="Left" Height="47" Margin="486,581,0,0" VerticalAlignment="Top" Width="358" FontSize="24"/>
         <Button x:Name="btnLotta" Content="" HorizontalAlignment="Left" Margin="696,653,0,0" VerticalAlignment="Top" Width="202" Height="104" Cursor="Hand" Click="btnLotta_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">

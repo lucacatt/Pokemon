@@ -65,3 +65,7 @@ E:\POKEMON SHOWDOWN\Pokemon-main\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Mostra_
 E:\POKEMON SHOWDOWN\Pokemon-main\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Mostra_Squadra.baml
 E:\POKEMON SHOWDOWN\Pokemon-main\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Lotta.g.cs
 E:\POKEMON SHOWDOWN\Pokemon-main\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Lotta.baml
+L:\Github\Pokemon\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Lotta.g.cs
+L:\Github\Pokemon\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Mostra_Squadra.g.cs
+L:\Github\Pokemon\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Lotta.baml
+L:\Github\Pokemon\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\Mostra_Squadra.baml

@@ -144,9 +144,16 @@ namespace Pokemon
         {
             if (pScelti.getPokems().Count == 6)
             {
-                Mostra_Squadra pregame = new Mostra_Squadra(pScelti);
-                this.Hide();
-                pregame.Show();
+                if (txtNome.Text != "")
+                {
+                    Mostra_Squadra pregame = new Mostra_Squadra(pScelti, txtNome.Text);
+                    this.Hide();
+                    pregame.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Inserire il nome", "Impossibile continuare", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {

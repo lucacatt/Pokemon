@@ -21,17 +21,21 @@ namespace Pokemon
         comunicazione c;
         public static Pokemons pScelti_per_lotta;
 
-        public Mostra_Squadra(Pokemons pScelti)
+        public Mostra_Squadra(Pokemons pScelti, string nome)
         {
             InitializeComponent();
             this.pScelti = pScelti;
             pScelti_per_lotta = pScelti;
-            c = new comunicazione();
+            c = new comunicazione(this);
 
             set_scenery();
             set_names();
             set_img();
             set_stats();
+
+            c = new comunicazione(this);
+            c.nome = nome;
+            c.start_thread_listen();
         }
 
         private void set_names()
@@ -139,16 +143,8 @@ namespace Pokemon
 
         private void btnLotta_Click(object sender, RoutedEventArgs e)
         {
-            if (txt_nome.Text == "")
-            {
-                MessageBox.Show("Inserisci il tuo nome per giocare", "Nome mancante", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                c.send_packet("a", txt_nome.Text);
-                c.start_thread_listen();
-            }
-
+            comunicazione.send_packet("a", c.nome);
+            Close();
         }
     }
 }

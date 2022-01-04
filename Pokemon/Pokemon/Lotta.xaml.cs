@@ -19,10 +19,10 @@ namespace Pokemon
     /// </summary>
     public partial class Lotta : Window
     {
-        Pokemons pScelti;
+        public Pokemons pScelti { get; set; }
         List<Mossa> mosse;
-        Pokem pkm_opp;
-
+        public Pokem pScelto { get; set; }
+        int pkLeft = 6;
         public Lotta(Pokemons pScelti)
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace Pokemon
             {
                 try
                 {
-                    this.pkm_opp = pkm_opp;
+                    this.pScelto = pkm_opp;
                     BitmapImage bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri(pkm_opp.imgFront, UriKind.Absolute);
@@ -144,6 +144,13 @@ namespace Pokemon
         private void btn_selez_Click(object sender, RoutedEventArgs e)
         {
             img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
+            pScelto = (Pokem)lb_squadra.SelectedItem;
+            comunicazione.send_packet("p", pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).Hp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";");
+        }
+
+        private void btn_usa_Click(object sender, RoutedEventArgs e)
+        {
+            comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";");
         }
     }
 }

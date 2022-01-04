@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using Microsoft.VisualBasic;
 
 namespace Pokemon
 {
@@ -12,13 +13,16 @@ namespace Pokemon
     {
         condivisa c;
         Lotta l;
-        public comunicazione()
+        Mostra_Squadra ms;
+        public string nome { get; set; }
+        public comunicazione(Mostra_Squadra m)
         {
             c = new condivisa();
             l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
+            ms = m;
         }
 
-        public void send_packet(string action, string message)
+        public static void send_packet(string action, string message)
         {
             UdpClient sender = new UdpClient();
             string to_send = action + ";" + message;
@@ -36,15 +40,21 @@ namespace Pokemon
 
         public void thread_listen_port()
         {
-            UdpClient listener = new UdpClient(12345);
-            IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
-            while (c.Received_message == "")
+            try
             {
-                byte[] dataReceived = listener.Receive(ref riceveEP);
-                c.Received_message = Encoding.ASCII.GetString(dataReceived);
-                message_control();
+                UdpClient listener = new UdpClient(12345);
+                IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
+                while (c.Received_message == "")
+                {
+                    byte[] dataReceived = listener.Receive(ref riceveEP);
+                    c.Received_message = Encoding.ASCII.GetString(dataReceived);
+                    message_control();
+                }
             }
-
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + nome);
+            }
         }
 
         public void message_control()
@@ -57,12 +67,11 @@ namespace Pokemon
             if (splitted_message[0] == "a")
             {
                 // message box --> accetta richiesta si/no
-
                 c.Received_message = "";
                 if (MessageBox.Show("Accettare la richiesta di gioco da " + c.Opponent + "?", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     //invia y
-                    send_packet("y", "user"); // da vedere nome!!
+                    send_packet("y", nome); // da vedere nome!!
                 }
                 else
                 {
@@ -79,6 +88,11 @@ namespace Pokemon
                 {
                     //invia y
                     send_packet("y", ""); // da vedere nome!!
+                    MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        l.Show();
+                    }));
                 }
                 else
                 {
@@ -92,6 +106,7 @@ namespace Pokemon
                 MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
+                    ms.Close();
                     l.Show();
                 }));
             }
@@ -109,12 +124,14 @@ namespace Pokemon
                 int hp_pkm = Convert.ToInt32(splitted_message[2]);
                 int pkm_remained = Convert.ToInt32(splitted_message[3]);
                 Pokem pkm_opp = new Pokem(pkm_name, hp_pkm);
+                pkm_opp.imgBack = splitted_message[4];
                 l.pkm_opp_received(pkm_opp, pkm_remained);
             }
             else if (splitted_message[0] == "at")
             {
                 // attacco (nome mossa, danno, effetto)
                 c.Received_message = "";
+                l.pScelto.Hp -= Convert.ToInt32(splitted_message[1]);
             }
             else if (splitted_message[0] == "og")
             {

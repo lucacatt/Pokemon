@@ -22,6 +22,7 @@ namespace Pokemon
         public Pokemons pScelti { get; set; }
         List<Mossa> mosse;
         public Pokem pScelto { get; set; }
+        public Pokem pOpp { get; set; }
         public int pkLeft { get; set; }
         comunicazione c;
 
@@ -42,8 +43,7 @@ namespace Pokemon
             {
                 try
                 {
-                    this.pScelto = pkm_opp;
-                    vAvv.Value = pkm_opp.Hp;
+                    this.pOpp = pkm_opp;
                     BitmapImage bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri(pkm_opp.imgFront, UriKind.Absolute);
@@ -148,17 +148,54 @@ namespace Pokemon
 
         private void btn_selez_Click(object sender, RoutedEventArgs e)
         {
-            if (c.send_packet("p;" + pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).Hp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";"))
-            {
-                img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
-                pScelto = pScelti.getPkm(lb_squadra.SelectedIndex);
-                vSc.Value = pScelto.Hp;
-            }
+            comunicazione.send_packet("p", pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).Hp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";");
+            img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
+            pScelto = pScelti.getPkm(lb_squadra.SelectedIndex);
+            prg_hp_pkm.Value = pScelto.Hp;
         }
 
         private void btn_usa_Click(object sender, RoutedEventArgs e)
         {
-            c.send_packet("at;" + mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";");
+            comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";");
+        }
+        public void change_progress(int hp)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                prg_hp_pkm.Value = hp;
+            }));
+        }
+
+        public void change_progressOpponent(int hp)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                prg_hp_pkm_opp.Value = hp;
+            }));
+        }
+
+        public void change()
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                for (int i = 0; i < pScelti.getSize(); i++)
+                {
+                    if (pScelti.getPkm(i).Hp > 0)
+                    {
+                        pScelto = pScelti.getPkm(i);
+                        comunicazione.send_packet("p", pScelti.getPkm(i).Nome + ";" + pScelti.getPkm(i).Hp + ";" + pkLeft + ";" + pScelti.getPkm(i).imgFront + ";");
+                        img_pkm.Source = set_pkm_image(i, 'b');
+                        pScelto = pScelti.getPkm(i);
+                        prg_hp_pkm.Value = pScelto.Hp;
+                        lb_mosse.Items.Clear();
+                        for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
+                        {
+                            lb_mosse.Items.Add(pScelti.getPkm(i).getMossa(j).nome);
+                        }
+                        break;
+                    }
+                }
+            }));
         }
     }
 }

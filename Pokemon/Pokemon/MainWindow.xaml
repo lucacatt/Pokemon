@@ -9,7 +9,7 @@
         Title="Scegli il tuo Pokémon" Height="523" Width="824">
     <Grid>
         <Image x:Name="pkm" HorizontalAlignment="Left" Height="294" Margin="67,115,0,0" VerticalAlignment="Top" Width="402"/>
-        <Label Content="Squadra" HorizontalAlignment="Left" Margin="680,29,0,0" VerticalAlignment="Top" Height="34" Width="56"/>
+        <Label Content="Squadra" HorizontalAlignment="Left" Margin="680,7,0,0" VerticalAlignment="Top" Height="34" Width="56"/>
         <Button x:Name="btnIdietro" Content="" HorizontalAlignment="Left" Margin="67,409,0,0" VerticalAlignment="Top" Click="btnIdietro_Click" Height="50" Width="75" BorderBrush="{x:Null}" Background="White" BorderThickness="0,0,0,0" Cursor="Hand">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -90,8 +90,8 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="btnRimuovi" Content="Rimuovi dalla squadra" HorizontalAlignment="Left" Margin="628,239,0,0" VerticalAlignment="Top" Width="154" Click="btnRimuovi_Click" Visibility="Visible" Cursor="Hand"/>
-        <Button x:Name="btnLotta" Content="" HorizontalAlignment="Left" Margin="640,397,0,0" VerticalAlignment="Top" Width="136" Click="btnLotta_Click" Height="70" Cursor="Hand">
+        <Button x:Name="btnRimuovi" Content="Rimuovi dalla squadra" HorizontalAlignment="Left" Margin="628,211,0,0" VerticalAlignment="Top" Width="154" Click="btnRimuovi_Click" Visibility="Visible" Cursor="Hand"/>
+        <Button x:Name="btnLotta" Content="" HorizontalAlignment="Left" Margin="640,399,0,0" VerticalAlignment="Top" Width="136" Click="btnLotta_Click" Height="70" Cursor="Hand">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -112,8 +112,8 @@
             </Button.Style>
         </Button>
         <Label x:Name="lbl_nome_pkm" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="67,13,0,0" VerticalAlignment="Top" Width="402" FontSize="40" FontWeight="Bold"/>
-        <ListBox x:Name="lb" HorizontalAlignment="Left" Height="171" Margin="611,57,0,0" VerticalAlignment="Top" Width="189"/>
-        <Label Content="Inserisci il tuo nickname" HorizontalAlignment="Left" Margin="651,262,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNome" HorizontalAlignment="Left" Margin="656,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="lb" HorizontalAlignment="Left" Height="171" Margin="611,33,0,0" VerticalAlignment="Top" Width="189"/>
+        <Label Content="Inserisci il tuo nickname" HorizontalAlignment="Left" Margin="639,237,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtNome" HorizontalAlignment="Left" Margin="648,263,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

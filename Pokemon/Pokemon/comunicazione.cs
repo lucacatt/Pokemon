@@ -19,7 +19,7 @@ namespace Pokemon
         public comunicazione(Mostra_Squadra m)
         {
             c = new condivisa();
-            l = new Lotta(Mostra_Squadra.pScelti_per_lotta,this);
+            l = new Lotta(Mostra_Squadra.pScelti_per_lotta, this);
             ms = m;
             isTurno = false;
         }
@@ -144,23 +144,46 @@ namespace Pokemon
                 pkm_opp.imgBack = splitted_message[4];
                 l.pkm_opp_received(pkm_opp, pkm_remained);
                 isTurno = true;
-                MessageBox.Show(isTurno.ToString());
             }
             else if (splitted_message[0] == "at")
             {
                 // attacco (nome mossa, danno, effetto)
                 c.Received_message = "";
-                /*if ((l.pScelto.Hp -= Convert.ToInt32(splitted_message[2])) <= 0)
+                int temp = (l.pScelto.Hp -= Convert.ToInt32(splitted_message[2]));
+                if (temp <= 0)
                 {
                     l.pScelto.Hp = 0;
                     l.pkLeft--;
-                    l.lblHpY.Content += "0";
+                    //l.lblHpY.Content += "0";
+                    l.change_progress(0);
+                    l.change();
                 }
                 else
                 {
-                    l.pScelto.Hp -= Convert.ToInt32(splitted_message[2]);
-                    l.lblHpY.Content += l.pScelto.Hp.ToString();
-                }*/
+                    l.pScelto.Hp = temp;
+                    //l.lblHpY.Content += l.pScelto.Hp.ToString();
+                    l.change_progress(l.pScelto.Hp);
+                }
+                isTurno = true;
+                send_packet("hp", l.pScelto.Hp.ToString());
+            }
+            else if (splitted_message[0] == "hp")
+            {
+                c.Received_message = "";
+                int temp = Convert.ToInt32(splitted_message[1]);
+                if (temp <= 0)
+                {
+                    l.pOpp.Hp = 0;
+                    l.pkLeft--;
+                    //l.lblHpY.Content += "0";
+                    l.change_progressOpponent(0);
+                }
+                else
+                {
+                    l.pOpp.Hp = temp;
+                    //l.lblHpY.Content += l.pScelto.Hp.ToString();
+                    l.change_progressOpponent(l.pOpp.Hp);
+                }
                 isTurno = true;
             }
             else if (splitted_message[0] == "og")

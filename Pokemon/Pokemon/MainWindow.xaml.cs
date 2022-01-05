@@ -131,8 +131,10 @@ namespace Pokemon
         {
             if (lb.SelectedIndex >= 0)
             {
-                lb.Items.Remove(lb.SelectedIndex);
                 pScelti.remove_pokemon(lb.SelectedIndex);
+                lb.Items.Remove(lb.SelectedIndex);
+                lb.Items.Remove(lb.SelectedItem);
+                lb.SelectedItem = -1;
             }
             else
             {

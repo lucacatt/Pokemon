@@ -14,36 +14,47 @@ namespace Pokemon
         condivisa c;
         Lotta l;
         Mostra_Squadra ms;
+        static bool turno { get; set; }
         public string nome { get; set; }
-        public bool isTurno { get; set; }
         public comunicazione(Mostra_Squadra m)
         {
             c = new condivisa();
             l = new Lotta(Mostra_Squadra.pScelti_per_lotta, this);
             ms = m;
-            isTurno = false;
+            turno = true;
+        }
+
+        public void setTurno(int setter)
+        {
+            if (setter == 0)
+                turno = false;
+            else
+                turno = true;
+        }
+
+        public static bool getTurno()
+        {
+            return turno;
         }
 
         public static void send_packet(string action, string message)
         {
             UdpClient sender = new UdpClient();
+            if (action == "at")
+            {
+                turno = false;
+            }
             string to_send = action + ";" + message;
             byte[] data = Encoding.ASCII.GetBytes(to_send);
             sender.Send(data, data.Length, "localhost", 12346);
         }
+
         public bool send_packet(string m)
         {
-            if (isTurno)
-            {
-                UdpClient sender = new UdpClient();
-                byte[] data = Encoding.ASCII.GetBytes(m);
-                sender.Send(data, data.Length, "localhost", 12346);
-                isTurno = false;
-                return true;
-            }
-            else
-                MessageBox.Show("Aspetta il tuo turno");
-            return false;
+            UdpClient sender = new UdpClient();
+            byte[] data = Encoding.ASCII.GetBytes(m);
+            sender.Send(data, data.Length, "localhost", 12346);
+            return true;
         }
 
         public void receive_packet()
@@ -88,6 +99,7 @@ namespace Pokemon
                 {
                     //invia y
                     send_packet("y", nome); // da vedere nome!!
+                    setTurno(0);
                 }
                 else
                 {
@@ -102,9 +114,9 @@ namespace Pokemon
                 c.Received_message = "";
                 if (MessageBox.Show("Vuoi davvero accedere al gioco contro " + c.Opponent + "?", "Accedere?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    isTurno = true;
                     //invia y
                     send_packet("y", ""); // da vedere nome!!
+                    setTurno(1);
                     MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
@@ -143,29 +155,26 @@ namespace Pokemon
                 Pokem pkm_opp = new Pokem(pkm_name, hp_pkm);
                 pkm_opp.imgBack = splitted_message[4];
                 l.pkm_opp_received(pkm_opp, pkm_remained);
-                isTurno = true;
             }
             else if (splitted_message[0] == "at")
             {
                 // attacco (nome mossa, danno, effetto)
                 c.Received_message = "";
-                int temp = (l.pScelto.Hp -= Convert.ToInt32(splitted_message[2]));
+                int temp = (l.pScelto.remHp -= Convert.ToInt32(splitted_message[2]));
                 if (temp <= 0)
                 {
-                    l.pScelto.Hp = 0;
+                    l.pScelto.remHp = 0;
                     l.pkLeft--;
-                    //l.lblHpY.Content += "0";
                     l.change_progress(0);
                     l.change();
                 }
                 else
                 {
-                    l.pScelto.Hp = temp;
-                    //l.lblHpY.Content += l.pScelto.Hp.ToString();
-                    l.change_progress(l.pScelto.Hp);
+                    l.pScelto.remHp = temp;
+                    l.change_progress(l.pScelto.remHp);
                 }
-                isTurno = true;
-                send_packet("hp", l.pScelto.Hp.ToString());
+                setTurno(1);
+                send_packet("hp", l.pScelto.remHp.ToString());
             }
             else if (splitted_message[0] == "hp")
             {
@@ -173,30 +182,25 @@ namespace Pokemon
                 int temp = Convert.ToInt32(splitted_message[1]);
                 if (temp <= 0)
                 {
-                    l.pOpp.Hp = 0;
+                    l.pOpp.remHp = 0;
                     l.pkLeft--;
-                    //l.lblHpY.Content += "0";
                     l.change_progressOpponent(0);
                 }
                 else
                 {
-                    l.pOpp.Hp = temp;
-                    //l.lblHpY.Content += l.pScelto.Hp.ToString();
-                    l.change_progressOpponent(l.pOpp.Hp);
+                    l.pOpp.remHp = temp;
+                    l.change_progressOpponent(l.pOpp.remHp);
                 }
-                isTurno = true;
             }
             else if (splitted_message[0] == "og")
             {
                 // oggetto (nome oggetto)
                 c.Received_message = "";
-                isTurno = true;
             }
             else if (splitted_message[0] == "c")
             {
                 // chiusura partita esce vinto/perso
                 c.Received_message = "";
-                isTurno = true;
             }
         }
 

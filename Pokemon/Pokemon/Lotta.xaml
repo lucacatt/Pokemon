@@ -74,5 +74,7 @@
         <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="211,460,0,0" VerticalAlignment="Top" Width="180"/>
         <ProgressBar x:Name="vAvv" HorizontalAlignment="Left" Height="10" Margin="211,115,0,0" VerticalAlignment="Top" Width="100"/>
         <ProgressBar x:Name="vSc" HorizontalAlignment="Left" Height="10" Margin="609,461,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="lblHpAvv" Content="HP: " HorizontalAlignment="Left" Margin="160,108,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblHpY" Content="HP: " HorizontalAlignment="Center" Margin="0,453,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

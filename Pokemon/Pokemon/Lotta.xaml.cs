@@ -22,14 +22,18 @@ namespace Pokemon
         public Pokemons pScelti { get; set; }
         List<Mossa> mosse;
         public Pokem pScelto { get; set; }
-        int pkLeft = 6;
-        public Lotta(Pokemons pScelti)
+        public int pkLeft { get; set; }
+        comunicazione c;
+
+        public Lotta(Pokemons pScelti, comunicazione cc)
         {
             InitializeComponent();
+            pkLeft = 6;
             this.pScelti = pScelti;
             this.mosse = new List<Mossa>();
             set_listbox();
             set_scenery();
+            c = cc;
         }
 
         public void pkm_opp_received(Pokem pkm_opp, int pkm_remained)
@@ -39,6 +43,7 @@ namespace Pokemon
                 try
                 {
                     this.pScelto = pkm_opp;
+                    vAvv.Value = pkm_opp.Hp;
                     BitmapImage bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.UriSource = new Uri(pkm_opp.imgFront, UriKind.Absolute);
@@ -143,14 +148,17 @@ namespace Pokemon
 
         private void btn_selez_Click(object sender, RoutedEventArgs e)
         {
-            img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
-            pScelto = (Pokem)lb_squadra.SelectedItem;
-            comunicazione.send_packet("p", pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).Hp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";");
+            if (c.send_packet("p;" + pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).Hp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";"))
+            {
+                img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
+                pScelto = pScelti.getPkm(lb_squadra.SelectedIndex);
+                vSc.Value = pScelto.Hp;
+            }
         }
 
         private void btn_usa_Click(object sender, RoutedEventArgs e)
         {
-            comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";");
+            c.send_packet("at;" + mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";");
         }
     }
 }

@@ -9,17 +9,19 @@ using Microsoft.VisualBasic;
 
 namespace Pokemon
 {
-    class comunicazione
+    public class comunicazione
     {
         condivisa c;
         Lotta l;
         Mostra_Squadra ms;
         public string nome { get; set; }
+        public bool isTurno { get; set; }
         public comunicazione(Mostra_Squadra m)
         {
             c = new condivisa();
-            l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
+            l = new Lotta(Mostra_Squadra.pScelti_per_lotta,this);
             ms = m;
+            isTurno = false;
         }
 
         public static void send_packet(string action, string message)
@@ -28,6 +30,20 @@ namespace Pokemon
             string to_send = action + ";" + message;
             byte[] data = Encoding.ASCII.GetBytes(to_send);
             sender.Send(data, data.Length, "localhost", 12346);
+        }
+        public bool send_packet(string m)
+        {
+            if (isTurno)
+            {
+                UdpClient sender = new UdpClient();
+                byte[] data = Encoding.ASCII.GetBytes(m);
+                sender.Send(data, data.Length, "localhost", 12346);
+                isTurno = false;
+                return true;
+            }
+            else
+                MessageBox.Show("Aspetta il tuo turno");
+            return false;
         }
 
         public void receive_packet()
@@ -86,6 +102,7 @@ namespace Pokemon
                 c.Received_message = "";
                 if (MessageBox.Show("Vuoi davvero accedere al gioco contro " + c.Opponent + "?", "Accedere?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    isTurno = true;
                     //invia y
                     send_packet("y", ""); // da vedere nome!!
                     MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -126,22 +143,37 @@ namespace Pokemon
                 Pokem pkm_opp = new Pokem(pkm_name, hp_pkm);
                 pkm_opp.imgBack = splitted_message[4];
                 l.pkm_opp_received(pkm_opp, pkm_remained);
+                isTurno = true;
+                MessageBox.Show(isTurno.ToString());
             }
             else if (splitted_message[0] == "at")
             {
                 // attacco (nome mossa, danno, effetto)
                 c.Received_message = "";
-                l.pScelto.Hp -= Convert.ToInt32(splitted_message[1]);
+                /*if ((l.pScelto.Hp -= Convert.ToInt32(splitted_message[2])) <= 0)
+                {
+                    l.pScelto.Hp = 0;
+                    l.pkLeft--;
+                    l.lblHpY.Content += "0";
+                }
+                else
+                {
+                    l.pScelto.Hp -= Convert.ToInt32(splitted_message[2]);
+                    l.lblHpY.Content += l.pScelto.Hp.ToString();
+                }*/
+                isTurno = true;
             }
             else if (splitted_message[0] == "og")
             {
                 // oggetto (nome oggetto)
                 c.Received_message = "";
+                isTurno = true;
             }
             else if (splitted_message[0] == "c")
             {
                 // chiusura partita esce vinto/perso
                 c.Received_message = "";
+                isTurno = true;
             }
         }
 

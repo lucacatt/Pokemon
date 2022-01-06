@@ -158,7 +158,7 @@ namespace Pokemon
         private void btn_usa_Click(object sender, RoutedEventArgs e)
         {
             if (comunicazione.getTurno() == true)
-                comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";");
+                comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
             else
             {
                 MessageBox.Show("Aspetta il tuo turno!", "Aspetta", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -160,7 +160,9 @@ namespace Pokemon
             {
                 // attacco (nome mossa, danno, effetto)
                 c.Received_message = "";
-                int temp = (l.pScelto.remHp -= Convert.ToInt32(splitted_message[2]));
+                int danno = Convert.ToInt32(splitted_message[2]);
+                danno = calcoloDanno(splitted_message[2], danno);
+                int temp = l.pScelto.remHp -= danno;
                 if (temp <= 0)
                 {
                     l.pScelto.remHp = 0;
@@ -208,6 +210,34 @@ namespace Pokemon
         {
             Thread thread = new Thread(new ThreadStart(thread_listen_port));
             thread.Start();
+        }
+        public int calcoloDanno(string tipo, int danno)
+        {
+            for (int j = 0; j < l.pScelto.Tipo.Count; j++)
+            {
+                for (int i = 0; i < l.pScelto.Tipo[j].super.Count; i++)
+                {
+                    if (tipo == l.pScelto.Tipo[j].super[i])
+                    {
+                        danno *= 2;
+                    }
+                }
+                for (int i = 0; i < l.pScelto.Tipo[j].less.Count; i++)
+                {
+                    if (tipo == l.pScelto.Tipo[j].less[i])
+                    {
+                        danno /= 2;
+                    }
+                }
+                for (int i = 0; i < l.pScelto.Tipo[j].no.Count; i++)
+                {
+                    if (tipo == l.pScelto.Tipo[j].no[i])
+                    {
+                        danno = 0;
+                    }
+                }
+            }
+            return danno;
         }
     }
 }

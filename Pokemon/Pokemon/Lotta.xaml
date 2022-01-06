@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokemon"
         mc:Ignorable="d"
-        Title="Lotta" Height="814" Width="1164">
+        Title="Lotta" Height="866" Width="1164">
     <Grid>
         <ListBox x:Name="lb_squadra" HorizontalAlignment="Left" Height="334" Margin="884,118,0,0" VerticalAlignment="Top" Width="250" FontSize="18" SelectionChanged="lb_squadra_SelectionChanged"/>
         <Label x:Name="lbl_pkm" Content="" HorizontalAlignment="Left" Height="47" Margin="884,66,0,0" VerticalAlignment="Top" Width="250"/>
@@ -30,21 +30,21 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Rectangle HorizontalAlignment="Center" Height="226" Margin="0,538,0,0" Stroke="Black" VerticalAlignment="Top" Width="1112" RadiusX="36.97" RadiusY="36.97"/>
-        <Label Content="HP" HorizontalAlignment="Left" Margin="78,584,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="52" Height="41" FontSize="18"/>
-        <Label Content="ATTACCO" HorizontalAlignment="Left" Margin="78,633,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="120" Height="42" FontSize="18"/>
-        <Label Content="DIFESA" HorizontalAlignment="Left" Margin="78,682,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="96" Height="43" FontSize="18"/>
-        <Label x:Name="lbl_hp_pkm" Content="" HorizontalAlignment="Left" Margin="215,584,0,0" VerticalAlignment="Top" Width="72" Height="41" FontSize="18"/>
-        <Label x:Name="lbl_atk_pkm" Content="" HorizontalAlignment="Left" Margin="215,633,0,0" VerticalAlignment="Top" Width="72" Height="42" FontSize="18"/>
-        <Label x:Name="lbl_df_pkm" Content="" HorizontalAlignment="Left" Margin="215,682,0,0" VerticalAlignment="Top" Width="72" Height="43" FontSize="18"/>
-        <ListBox x:Name="lb_mosse" HorizontalAlignment="Left" Height="146" Margin="356,578,0,0" VerticalAlignment="Top" Width="168" FontSize="18" SelectionChanged="lb_mosse_SelectionChanged"/>
-        <Label Content="TIPO" HorizontalAlignment="Left" Margin="586,584,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="52" Height="41" FontSize="18"/>
-        <Label Content="DANNO" HorizontalAlignment="Left" Margin="586,633,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="120" Height="42" FontSize="18"/>
-        <Label Content="EFFETTO" HorizontalAlignment="Left" Margin="586,682,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="96" Height="43" FontSize="18"/>
-        <Label x:Name="lbl_tipo" Content="" HorizontalAlignment="Left" Margin="723,584,0,0" VerticalAlignment="Top" Width="175" Height="41" FontSize="18"/>
-        <Label x:Name="lbl_danno" Content="" HorizontalAlignment="Left" Margin="723,633,0,0" VerticalAlignment="Top" Width="175" Height="42" FontSize="18"/>
-        <Label x:Name="lbl_effetto" Content="" HorizontalAlignment="Left" Margin="723,682,0,0" VerticalAlignment="Top" Width="175" Height="43" FontSize="18"/>
-        <Button x:Name="btn_usa" Content="" HorizontalAlignment="Left" Height="71" Margin="945,619,0,0" VerticalAlignment="Top" Width="169" Cursor="Hand" Click="btn_usa_Click">
+        <Rectangle HorizontalAlignment="Center" Height="189" Margin="0,538,0,0" Stroke="Black" VerticalAlignment="Top" Width="1112" RadiusX="11" RadiusY="11"/>
+        <Label Content="HP" HorizontalAlignment="Left" Margin="58,562,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="52" Height="41" FontSize="18"/>
+        <Label Content="ATTACCO" HorizontalAlignment="Left" Margin="58,611,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="120" Height="42" FontSize="18"/>
+        <Label Content="DIFESA" HorizontalAlignment="Left" Margin="58,660,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="96" Height="43" FontSize="18"/>
+        <Label x:Name="lbl_hp_pkm" Content="" HorizontalAlignment="Left" Margin="211,562,0,0" VerticalAlignment="Top" Width="72" Height="41" FontSize="18"/>
+        <Label x:Name="lbl_atk_pkm" Content="" HorizontalAlignment="Left" Margin="211,611,0,0" VerticalAlignment="Top" Width="72" Height="42" FontSize="18"/>
+        <Label x:Name="lbl_df_pkm" Content="" HorizontalAlignment="Left" Margin="211,660,0,0" VerticalAlignment="Top" Width="72" Height="43" FontSize="18"/>
+        <ListBox x:Name="lb_mosse" HorizontalAlignment="Left" Height="160" Margin="342,552,0,0" VerticalAlignment="Top" Width="168" FontSize="18" SelectionChanged="lb_mosse_SelectionChanged"/>
+        <Label Content="TIPO" HorizontalAlignment="Left" Margin="568,562,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="52" Height="41" FontSize="18"/>
+        <Label Content="DANNO" HorizontalAlignment="Left" Margin="568,611,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="120" Height="42" FontSize="18"/>
+        <Label Content="EFFETTO" HorizontalAlignment="Left" Margin="568,660,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="96" Height="43" FontSize="18"/>
+        <Label x:Name="lbl_tipo" Content="" HorizontalAlignment="Left" Margin="706,562,0,0" VerticalAlignment="Top" Width="174" Height="41" FontSize="18"/>
+        <Label x:Name="lbl_danno" Content="" HorizontalAlignment="Left" Margin="706,611,0,0" VerticalAlignment="Top" Width="174" Height="42" FontSize="18"/>
+        <Label x:Name="lbl_effetto" Content="" HorizontalAlignment="Left" Margin="706,660,0,0" VerticalAlignment="Top" Width="174" Height="43" FontSize="18"/>
+        <Button x:Name="btn_usa" Content="" HorizontalAlignment="Left" Height="72" Margin="924,592,0,0" VerticalAlignment="Top" Width="170" Cursor="Hand" Click="btn_usa_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -72,5 +72,25 @@
         <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="529,118,0,0" VerticalAlignment="Top" Width="180"/>
         <ProgressBar x:Name="prg_hp_pkm" HorizontalAlignment="Left" Height="11" Margin="211,461,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
         <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="211,460,0,0" VerticalAlignment="Top" Width="180"/>
+        <Rectangle HorizontalAlignment="Center" Height="91" Margin="0,733,0,0" Stroke="Black" VerticalAlignment="Top" Width="1112" RadiusX="11" RadiusY="11"/>
+        <Label Content="OGGETTI" HorizontalAlignment="Left" Margin="58,762,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="92" Height="34" FontSize="18"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="174,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>
+        <Button x:Name="btn_ogg1" Content="" HorizontalAlignment="Left" Height="65" Margin="182,747,0,0" VerticalAlignment="Top" Width="113" Click="btn_ogg1_Click" FontWeight="Bold" FontSize="13"/>
+        <Label x:Name="lbl_rem1" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="300,747,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="20" FontSize="14" FontWeight="Bold"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="333,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>
+        <Label x:Name="lbl_rem2" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="460,747,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="20" FontSize="14" FontWeight="Bold"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="492,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>
+        <Label x:Name="lbl_rem3" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="619,747,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="20" FontSize="14" FontWeight="Bold"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="651,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>
+        <Label x:Name="lbl_rem4" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="779,747,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="20" FontSize="14" FontWeight="Bold"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="810,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>
+        <Label x:Name="lbl_rem5" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="938,747,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="20" FontSize="14" FontWeight="Bold"/>
+        <Rectangle HorizontalAlignment="Left" Height="78" Margin="969,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>
+        <Label x:Name="lbl_rem6" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="64" Margin="1097,747,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="20" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="btn_ogg2" Content="" HorizontalAlignment="Left" Height="64" Margin="343,748,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg2_Click" FontWeight="Bold" FontSize="13"/>
+        <Button x:Name="btn_ogg3" Content="" HorizontalAlignment="Left" Height="64" Margin="502,748,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg3_Click" FontWeight="Bold" FontSize="13"/>
+        <Button x:Name="btn_ogg4" Content="" HorizontalAlignment="Left" Height="65" Margin="662,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg4_Click" FontWeight="Bold" FontSize="13"/>
+        <Button x:Name="btn_ogg5" Content="" HorizontalAlignment="Left" Height="65" Margin="821,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg5_Click" FontWeight="Bold" FontSize="13"/>
+        <Button x:Name="btn_ogg6" Content="" HorizontalAlignment="Left" Height="65" Margin="980,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg6_Click" FontWeight="Bold" FontSize="13"/>
     </Grid>
 </Window>

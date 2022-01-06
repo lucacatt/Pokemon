@@ -24,17 +24,25 @@ namespace Pokemon
         public Pokem pScelto { get; set; }
         public Pokem pOpp { get; set; }
         public int pkLeft { get; set; }
-        comunicazione c;
-
-        public Lotta(Pokemons pScelti, comunicazione cc)
+        public oggetti Objs { get; set; }
+        int obj_1_rem;
+        int obj_2_rem;
+        int obj_3_rem;
+        int obj_4_rem;
+        int obj_5_rem;
+        int obj_6_rem;
+        int nTurno;
+        public Lotta(Pokemons pScelti)
         {
             InitializeComponent();
             pkLeft = 6;
             this.pScelti = pScelti;
             this.mosse = new List<Mossa>();
+            this.Objs = new oggetti();
+            Objs.leggi(AppDomain.CurrentDomain.BaseDirectory + "oggetti.txt");
+            nTurno = 0;
             set_listbox();
             set_scenery();
-            c = cc;
         }
 
         public void pkm_opp_received(Pokem pkm_opp, int pkm_remained)
@@ -90,13 +98,31 @@ namespace Pokemon
             background.Stretch = Stretch.Fill;
             background.StretchDirection = StretchDirection.Both;
             background.Source = img_b;
+            btn_ogg1.Content = Objs.getobj(0).Nome.ToUpper();
+            btn_ogg2.Content = Objs.getobj(1).Nome.ToUpper();
+            btn_ogg3.Content = Objs.getobj(2).Nome.ToUpper();
+            btn_ogg4.Content = Objs.getobj(3).Nome.ToUpper();
+            btn_ogg5.Content = Objs.getobj(4).Nome.ToUpper();
+            btn_ogg6.Content = Objs.getobj(5).Nome.ToUpper();
+            obj_1_rem = Objs.getobj(0).Quantita;
+            obj_2_rem = Objs.getobj(1).Quantita;
+            obj_3_rem = Objs.getobj(2).Quantita;
+            obj_4_rem = Objs.getobj(3).Quantita;
+            obj_5_rem = Objs.getobj(4).Quantita;
+            obj_6_rem = Objs.getobj(5).Quantita;
+            lbl_rem1.Content = obj_1_rem;
+            lbl_rem2.Content = obj_2_rem;
+            lbl_rem3.Content = obj_3_rem;
+            lbl_rem4.Content = obj_4_rem;
+            lbl_rem5.Content = obj_5_rem;
+            lbl_rem6.Content = obj_6_rem;
         }
 
         private void lb_squadra_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lb_mosse.Items.Clear();
             img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'f');
-            lbl_hp_pkm.Content = pScelti.getPkm(lb_squadra.SelectedIndex).Hp;
+            lbl_hp_pkm.Content = pScelti.getPkm(lb_squadra.SelectedIndex).remHp;
             lbl_atk_pkm.Content = pScelti.getPkm(lb_squadra.SelectedIndex).Atk;
             lbl_df_pkm.Content = pScelti.getPkm(lb_squadra.SelectedIndex).Def;
             prg_hp_pkm.Maximum = pScelti.getPkm(lb_squadra.SelectedIndex).Hp;
@@ -148,11 +174,27 @@ namespace Pokemon
 
         private void btn_selez_Click(object sender, RoutedEventArgs e)
         {
-            comunicazione.send_packet("p", pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).remHp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";");
-            img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
-            pScelto = pScelti.getPkm(lb_squadra.SelectedIndex);
-            prg_hp_pkm.Maximum = pScelto.Hp;
-            prg_hp_pkm.Value = pScelto.remHp;
+            if (comunicazione.getTurno() == true || nTurno == 0)
+            {
+                nTurno++;
+                comunicazione.send_packet("p", pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).remHp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";");
+                img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
+                pScelto = pScelti.getPkm(lb_squadra.SelectedIndex);
+                pScelto.Index = lb_squadra.SelectedIndex;
+                prg_hp_pkm.Maximum = pScelto.Hp;
+                prg_hp_pkm.Value = pScelto.remHp;
+                check_HP();
+            }
+            else
+            {
+                MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+                img_pkm.Source = set_pkm_image(pScelto.Index, 'b');
+                lbl_hp_pkm.Content = pScelto.remHp;
+                lbl_atk_pkm.Content = pScelto.Atk;
+                lbl_df_pkm.Content = pScelto.Def;
+                prg_hp_pkm.Maximum = pScelto.Hp;
+                prg_hp_pkm.Value = pScelto.remHp;
+            }
         }
 
         private void btn_usa_Click(object sender, RoutedEventArgs e)
@@ -160,16 +202,16 @@ namespace Pokemon
             if (comunicazione.getTurno() == true)
                 comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
             else
-            {
-                MessageBox.Show("Aspetta il tuo turno!", "Aspetta", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         public void change_progress(int hp)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
             {
                 prg_hp_pkm.Value = hp;
+                lbl_hp_pkm.Content = hp;
                 pScelti.getPkm(lb_squadra.SelectedIndex).remHp = hp;
+                check_HP();
             }));
         }
 
@@ -203,6 +245,267 @@ namespace Pokemon
                         break;
                     }
                 }
+            }));
+        }
+
+        public void first_dead()
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                for (int i = 0; i < pScelti.getSize(); i++)
+                {
+                    if (pScelti.getPkm(i).remHp < 0)
+                    {
+                        pScelto = pScelti.getPkm(i);
+                        comunicazione.send_packet("p", pScelti.getPkm(i).Nome + ";" + pScelti.getPkm(i).remHp + ";" + pkLeft + ";" + pScelti.getPkm(i).imgFront + ";");
+                        img_pkm.Source = set_pkm_image(i, 'b');
+                        pScelto = pScelti.getPkm(i);
+                        prg_hp_pkm.Maximum = pScelto.Hp;
+                        prg_hp_pkm.Value = pScelto.remHp;
+                        lb_mosse.Items.Clear();
+                        for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
+                        {
+                            lb_mosse.Items.Add(pScelti.getPkm(i).getMossa(j).nome);
+                        }
+                        break;
+                    }
+                }
+            }));
+        }
+
+        public void check_HP()
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (pScelto.remHp > (pScelto.Hp * 0.75))
+                    change_GREENYELLOW();
+                else if (pScelto.remHp > (pScelto.Hp * 0.5))
+                    change_LIGHTGREEN();
+                else if (pScelto.remHp > (pScelto.Hp * 0.3))
+                    change_YELLOW();
+                else if (pScelto.remHp > (pScelto.Hp * 0.2))
+                    change_ORANGE();
+                else if (pScelto.remHp > (pScelto.Hp * 0.1))
+                    change_ORANGERED();
+
+            }));
+        }
+
+        public void change_ORANGERED()
+        {
+            lbl_hp_pkm.Background = Brushes.OrangeRed;
+        }
+        public void change_ORANGE()
+        {
+            lbl_hp_pkm.Background = Brushes.Orange;
+        }
+        public void change_GREENYELLOW()
+        {
+            lbl_hp_pkm.Background = Brushes.GreenYellow;
+        }
+        public void change_LIGHTGREEN()
+        {
+            lbl_hp_pkm.Background = Brushes.LightGreen;
+        }
+        public void change_YELLOW()
+        {
+            lbl_hp_pkm.Background = Brushes.Yellow;
+        }
+
+        public void change_SELECTION()
+        {
+            lbl_hp_pkm.Background = Brushes.Transparent;
+        }
+
+        private void btn_ogg1_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+
+                if (comunicazione.getTurno() == true)
+                {
+                    if (MessageBox.Show(Objs.getobj(0).Nome + " " + Objs.getobj(0).Effetto + "\nVuoi davvero usarlo?", "Usare " + Objs.getobj(0).Nome + "?", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        if (obj_1_rem > 0)
+                        {
+                            if ((pScelto.remHp + 20) < pScelto.Hp)
+                            {
+                                pScelto.remHp += 20;
+                                obj_1_rem -= 1;
+                                lbl_rem1.Content = obj_1_rem;
+                                check_HP();
+                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                prg_hp_pkm.Value = pScelto.remHp;
+                                lbl_hp_pkm.Content = pScelto.remHp;
+                            }
+                            else
+                            {
+                                pScelto.remHp = pScelto.Hp;
+                                obj_1_rem -= 1;
+                                lbl_rem1.Content = obj_1_rem;
+                                check_HP();
+                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                prg_hp_pkm.Value = pScelto.remHp;
+                                lbl_hp_pkm.Content = pScelto.remHp;
+                            }
+                            comunicazione.send_packet("og", Objs.getobj(0).Nome + ";");
+                        }
+                        else
+                            MessageBox.Show("Hai finito " + Objs.getobj(0).Nome + "!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }));
+        }
+
+        private void btn_ogg2_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+
+                if (comunicazione.getTurno() == true)
+                {
+                    if (MessageBox.Show(Objs.getobj(1).Nome + " " + Objs.getobj(1).Effetto + "\nVuoi davvero usarlo?", "Usare " + Objs.getobj(1).Nome + "?", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        if (obj_2_rem > 0)
+                        {
+                            if ((pScelto.remHp + 60) < pScelto.Hp)
+                            {
+                                pScelto.remHp += 60;
+                                obj_2_rem -= 1;
+                                lbl_rem2.Content = obj_2_rem;
+                                check_HP();
+                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                prg_hp_pkm.Value = pScelto.remHp;
+                                lbl_hp_pkm.Content = pScelto.remHp;
+                            }
+                            else
+                            {
+                                pScelto.remHp = pScelto.Hp;
+                                obj_2_rem -= 1;
+                                lbl_rem1.Content = obj_2_rem;
+                                check_HP();
+                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                prg_hp_pkm.Value = pScelto.remHp;
+                                lbl_hp_pkm.Content = pScelto.remHp;
+                            }
+                            comunicazione.send_packet("og", Objs.getobj(1).Nome + ";");
+                        }
+                        else
+                            MessageBox.Show("Hai finito " + Objs.getobj(1).Nome + "!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }));
+        }
+
+        private void btn_ogg3_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (comunicazione.getTurno() == true)
+                {
+                    if (MessageBox.Show(Objs.getobj(2).Nome + " " + Objs.getobj(2).Effetto + "\nVuoi davvero usarlo?", "Usare " + Objs.getobj(2).Nome + "?", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        if (obj_3_rem > 0)
+                        {
+                            //DA VEDERE EFFETTI
+                            pScelto.remHp = pScelto.Hp;
+                            obj_3_rem -= 1;
+                            check_HP();
+                            lbl_rem3.Content = obj_3_rem;
+                            prg_hp_pkm.Maximum = pScelto.remHp;
+                            prg_hp_pkm.Value = pScelto.remHp;
+                            lbl_hp_pkm.Content = pScelto.remHp;
+                            comunicazione.send_packet("og", Objs.getobj(2).Nome + ";");
+                        }
+                        else
+                            MessageBox.Show("Hai finito " + Objs.getobj(2).Nome + "!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }));
+        }
+
+        private void btn_ogg4_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (comunicazione.getTurno() == true)
+                {
+                    if (MessageBox.Show(Objs.getobj(3).Nome + " " + Objs.getobj(3).Effetto + "\nVuoi davvero usarlo?", "Usare " + Objs.getobj(3).Nome + "?", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        if (obj_4_rem > 0)
+                        {
+                            first_dead();
+                            pScelto.remHp = (pScelto.Hp / 2);
+                            obj_4_rem -= 1;
+                            lbl_rem4.Content = obj_4_rem;
+                            check_HP();
+                            prg_hp_pkm.Maximum = pScelto.remHp;
+                            prg_hp_pkm.Value = pScelto.remHp;
+                            lbl_hp_pkm.Content = pScelto.remHp;
+                            comunicazione.send_packet("og", Objs.getobj(3).Nome + ";");
+                        }
+                        else
+                            MessageBox.Show("Hai finito " + Objs.getobj(3).Nome + "!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }));
+        }
+
+        private void btn_ogg5_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (comunicazione.getTurno() == true)
+                {
+                    if (MessageBox.Show(Objs.getobj(4).Nome + " " + Objs.getobj(4).Effetto + "\nVuoi davvero usarlo?", "Usare " + Objs.getobj(4).Nome + "?", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        if (obj_5_rem > 0)
+                        {
+                            pScelto.Atk += 10;
+                            lbl_atk_pkm.Content = pScelto.Atk;
+                            obj_5_rem -= 1;
+                            lbl_rem5.Content = obj_5_rem;
+                            comunicazione.send_packet("og", Objs.getobj(4).Nome + ";");
+                        }
+                        else
+                            MessageBox.Show("Hai finito " + Objs.getobj(4).Nome + "!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }));
+        }
+
+        private void btn_ogg6_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (comunicazione.getTurno() == true)
+                {
+                    if (MessageBox.Show(Objs.getobj(5).Nome + " " + Objs.getobj(5).Effetto + "\nVuoi davvero usarlo?", "Usare " + Objs.getobj(5).Nome + "?", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        if (obj_6_rem > 0)
+                        {
+                            pScelto.Atk += 10;
+                            lbl_atk_pkm.Content = pScelto.Atk;
+                            obj_6_rem -= 1;
+                            lbl_rem6.Content = obj_6_rem;
+                            comunicazione.send_packet("og", Objs.getobj(5).Nome + ";");
+                        }
+                        else
+                            MessageBox.Show("Hai finito " + Objs.getobj(5).Nome + "!", "Oops!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
             }));
         }
     }

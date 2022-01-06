@@ -16,6 +16,7 @@ namespace Pokemon
         public List<Mossa> Mosse { get; set; }
         public string imgFront { get; set; }
         public string imgBack { get; set; }
+        public int Index { get; set; }
         public Pokem()
         {
             Nome = "";
@@ -26,11 +27,11 @@ namespace Pokemon
             Mosse = new List<Mossa>();
             imgFront = "";
             imgBack = "";
+            Index = -1;
         }
 
         public Pokem(string nome, int hp)
         {
-
             string path = AppDomain.CurrentDomain.BaseDirectory + "pokemon.txt";
             Nome = nome;
             remHp = hp;
@@ -53,6 +54,7 @@ namespace Pokemon
             Tipo = new List<Tipo>();
             Mosse = new List<Mossa>();
             imgBack = "";
+            Index = -1;
         }
 
         public Mossa getMossa(int pos)

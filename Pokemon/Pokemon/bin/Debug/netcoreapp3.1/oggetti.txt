@@ -1,0 +1,6 @@
+pozione;cura 20 HP;5
+superpozione;cura 60 HP;3
+ricaricatotale;cura tutti gli HP e gli effetti;1
+revitalizzante;rianima un pokemon a metà vita;1
+proteina;aumenta di 10 punti l'attacco;5
+ferro;aumenta di 10 punti la difesa;5

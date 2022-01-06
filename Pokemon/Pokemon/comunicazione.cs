@@ -19,7 +19,7 @@ namespace Pokemon
         public comunicazione(Mostra_Squadra m)
         {
             c = new condivisa();
-            l = new Lotta(Mostra_Squadra.pScelti_per_lotta, this);
+            l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
             ms = m;
             turno = true;
         }
@@ -44,6 +44,8 @@ namespace Pokemon
             {
                 turno = false;
             }
+            if (action == "og")
+                turno = false;
             string to_send = action + ";" + message;
             byte[] data = Encoding.ASCII.GetBytes(to_send);
             sender.Send(data, data.Length, "localhost", 12346);
@@ -166,6 +168,7 @@ namespace Pokemon
                 if (temp <= 0)
                 {
                     l.pScelto.remHp = 0;
+                    l.lbl_hp_pkm.Content = l.pScelto.remHp;
                     l.pkLeft--;
                     l.change_progress(0);
                     l.change();
@@ -175,6 +178,7 @@ namespace Pokemon
                     l.pScelto.remHp = temp;
                     l.change_progress(l.pScelto.remHp);
                 }
+                //l.check_HP();
                 setTurno(1);
                 send_packet("hp", l.pScelto.remHp.ToString());
             }
@@ -198,6 +202,39 @@ namespace Pokemon
             {
                 // oggetto (nome oggetto)
                 c.Received_message = "";
+                if (splitted_message[1] == "pozione")
+                {
+                    l.pOpp.remHp += 20;
+                    l.change_progressOpponent(l.pOpp.remHp);
+                    setTurno(0);
+                    MessageBox.Show("usata pozione");
+                }
+                else if (splitted_message[1] == "superpozione")
+                {
+                    l.pOpp.remHp += 60;
+                    l.change_progressOpponent(l.pOpp.remHp);
+                    setTurno(0);
+                    MessageBox.Show("usata superpozione");
+                }
+                else if (splitted_message[1] == "ricaricatotale")
+                {
+                    l.pOpp.remHp = l.pOpp.Hp;
+                    l.change_progressOpponent(l.pOpp.remHp);
+                    setTurno(0);
+                    //ricarica effetti !!
+                    MessageBox.Show("usata ricaricatotale");
+                }
+                else if (splitted_message[1] == "revitalizzante")
+                {
+                    setTurno(0);
+                    MessageBox.Show("usata revitalizzante");
+                }
+                else if (splitted_message[1] == "proteina")
+                {
+
+                    setTurno(0);
+                    MessageBox.Show("usata proteina");
+                }
             }
             else if (splitted_message[0] == "c")
             {

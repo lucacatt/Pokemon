@@ -45,11 +45,11 @@ namespace Pokemon
                     {
                         imgFront = temp.imgFront;
                         Hp = temp.Hp;
+                        Atk = temp.Atk;
+                        Def = temp.Def;
                     }
                 }
             }
-            Atk = 0;
-            Def = 0;
             Tipo = new List<Tipo>();
             Mosse = new List<Mossa>();
             imgBack = "";

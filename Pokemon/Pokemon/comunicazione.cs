@@ -179,6 +179,29 @@ namespace Pokemon
                     l.pScelto.remHp = temp;
                     l.change_progress(l.pScelto.remHp);
                 }
+                if (splitted_message[3] != "")
+                {
+                    if (splitted_message[3] == "PARALIZZA")
+                    {
+                        MessageBox.Show("Paralizzato");
+                        l.pScelto.p.isPar = true;
+                    }
+                    else if (splitted_message[3] == "SCOTTA")
+                    {
+                        MessageBox.Show("Scottato");
+                        l.pScelto.b.isBurned = true;
+                    }
+                    else if (splitted_message[3] == "ADDORMENTA")
+                    {
+                        MessageBox.Show("Addormento");
+                        l.pScelto.s.isSleep = true;
+                    }
+                    else if (splitted_message[3].Split(' ')[1] == "vita")
+                    {
+                        l.pScelto.remHp += Convert.ToInt32(splitted_message[3].Split(' ')[0].Substring(1));
+                        l.change_progress(l.pScelto.remHp);
+                    }
+                }
                 //l.check_HP();
                 setTurno(1);
                 send_packet("hp", l.pScelto.remHp.ToString());
@@ -220,7 +243,12 @@ namespace Pokemon
                 {
                     l.pOpp.remHp = l.pOpp.Hp;
                     l.change_progressOpponent(l.pOpp.remHp);
-                    //ricarica effetti !!
+                    l.pScelto.b.burnCount = 5;
+                    l.pScelto.b.isBurned = false;
+                    l.pScelto.s.sleepCount = 5;
+                    l.pScelto.s.isSleep = false;
+                    l.pScelto.p.parCount = 5;
+                    l.pScelto.p.isPar = false;
                     MessageBox.Show("usata ricaricatotale");
                 }
                 else if (splitted_message[1] == "revitalizzante")

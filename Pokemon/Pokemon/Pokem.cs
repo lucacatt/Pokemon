@@ -17,6 +17,9 @@ namespace Pokemon
         public string imgFront { get; set; }
         public string imgBack { get; set; }
         public int Index { get; set; }
+        public Paralysis p { get; set; }
+        public Burn b { get; set; }
+        public Sleep s { get; set; }
         public Pokem()
         {
             Nome = "";
@@ -28,6 +31,9 @@ namespace Pokemon
             imgFront = "";
             imgBack = "";
             Index = -1;
+            p = new Paralysis();
+            b = new Burn();
+            s = new Sleep();
         }
 
         public Pokem(string nome, int hp)

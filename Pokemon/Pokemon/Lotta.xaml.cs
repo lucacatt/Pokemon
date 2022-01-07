@@ -37,8 +37,8 @@ namespace Pokemon
             InitializeComponent();
             pkLeft = 6;
             this.pScelti = pScelti;
-            this.mosse = new List<Mossa>();
-            this.Objs = new oggetti();
+            mosse = new List<Mossa>();
+            Objs = new oggetti();
             Objs.leggi(AppDomain.CurrentDomain.BaseDirectory + "oggetti.txt");
             nTurno = 0;
             set_listbox();
@@ -202,7 +202,30 @@ namespace Pokemon
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
             {
                 if (comunicazione.getTurno() == true)
-                    comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
+                {
+                    effetto();
+                    try
+                    {
+                        if (mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[1] == "difesa")
+                        {
+                            float temp = (float)pScelto.Def / 100 * Convert.ToInt32(mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[0].Substring(1, 2));
+                            pScelto.Def += (int)temp;
+                            lbl_df_pkm.Content = pScelto.Def;
+                            MessageBox.Show("difesa aumentata");
+                        }
+                        else if (mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[1] == "attacco")
+                        {
+                            MessageBox.Show("attacco aumentato");
+                            float temp = pScelto.Atk / 100 * Convert.ToInt32(mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[0].Substring(1, 2));
+                            pScelto.Atk += (int)temp;
+                            lbl_atk_pkm.Content = pScelto.Atk;
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
                 else
                     MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
             }));
@@ -297,7 +320,7 @@ namespace Pokemon
             else if (hp == 0)
                 change_RED();
         }
-        
+
         public Pokem get_by_index(int index)
         {
             for (int i = 0; i < pScelti.getSize(); i++)
@@ -371,6 +394,7 @@ namespace Pokemon
                                 prg_hp_pkm.Value = pScelto.remHp;
                                 lbl_hp_pkm.Content = pScelto.remHp;
                             }
+                            bruciatura();
                             comunicazione.send_packet("og", Objs.getobj(0).Nome + ";");
                         }
                         else
@@ -413,6 +437,7 @@ namespace Pokemon
                                 prg_hp_pkm.Value = pScelto.remHp;
                                 lbl_hp_pkm.Content = pScelto.remHp;
                             }
+                            bruciatura();
                             comunicazione.send_packet("og", Objs.getobj(1).Nome + ";");
                         }
                         else
@@ -442,6 +467,7 @@ namespace Pokemon
                             prg_hp_pkm.Maximum = pScelto.Hp;
                             prg_hp_pkm.Value = pScelto.remHp;
                             lbl_hp_pkm.Content = pScelto.remHp;
+                            bruciatura();
                             comunicazione.send_packet("og", Objs.getobj(2).Nome + ";");
                         }
                         else
@@ -471,6 +497,7 @@ namespace Pokemon
                             prg_hp_pkm.Maximum = pScelto.Hp;
                             prg_hp_pkm.Value = pScelto.remHp;
                             lbl_hp_pkm.Content = pScelto.remHp;
+                            bruciatura();
                             comunicazione.send_packet("og", Objs.getobj(3).Nome + ";");
                         }
                         else
@@ -496,6 +523,7 @@ namespace Pokemon
                             lbl_atk_pkm.Content = pScelto.Atk;
                             obj_5_rem -= 1;
                             lbl_rem5.Content = obj_5_rem;
+                            bruciatura();
                             comunicazione.send_packet("og", Objs.getobj(4).Nome + ";");
                         }
                         else
@@ -521,6 +549,7 @@ namespace Pokemon
                             lbl_atk_pkm.Content = pScelto.Atk;
                             obj_6_rem -= 1;
                             lbl_rem6.Content = obj_6_rem;
+                            bruciatura();
                             comunicazione.send_packet("og", Objs.getobj(5).Nome + ";");
                         }
                         else
@@ -530,6 +559,105 @@ namespace Pokemon
                 else
                     MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
             }));
+        }
+        private void effetto()
+        {
+            bruciatura();
+            if (!pScelto.s.isSleep)
+            {
+                if (!pScelto.p.isPar)
+                {
+                    comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
+                }
+                else
+                {
+                    Random rnd = new Random();
+                    int perc = rnd.Next(1, 100);
+                    if (perc > 25)
+                    {
+                        comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
+                        pScelto.p.parCount--;
+                    }
+                    else
+                    {
+                        comunicazione.send_packet("at", "" + ";" + 0 + ";" + "" + ";" + "" + ";");
+                        MessageBox.Show("il pokemon è paralizzato non può agire");
+                        if (pScelto.p.parCount == 1)
+                        {
+                            pScelto.p.parCount = 5;
+                            pScelto.p.isPar = false;
+                        }
+                        else
+                        {
+                            pScelto.p.parCount--;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                comunicazione.send_packet("at", "" + ";" + 0 + ";" + "" + ";" + "" + ";");
+                MessageBox.Show("il pokemon dorme non può agire");
+                if (pScelto.s.sleepCount == 1)
+                {
+                    pScelto.s.sleepCount = 5;
+                    pScelto.s.isSleep = false;
+                }
+                else
+                {
+                    pScelto.s.sleepCount--;
+                }
+            }
+        }
+        public double calcoloDanno(string tipo)
+        {
+            double multiplier = 1.0;
+            for (int j = 0; j < pScelto.Tipo.Count; j++)
+            {
+                for (int i = 0; i < pScelto.Tipo[j].super.Count; i++)
+                {
+                    if (tipo == pScelto.Tipo[j].super[i])
+                    {
+                        multiplier *= 0.5;
+                    }
+                }
+                for (int i = 0; i < pScelto.Tipo[j].less.Count; i++)
+                {
+                    if (tipo == pScelto.Tipo[j].less[i])
+                    {
+                        multiplier *= 2.0;
+                    }
+                }
+                for (int i = 0; i < pScelto.Tipo[j].no.Count; i++)
+                {
+                    if (tipo == pScelto.Tipo[j].no[i])
+                    {
+                        multiplier *= 0.0;
+                    }
+                }
+            }
+            return multiplier;
+        }
+        public void bruciatura()
+        {
+            if (pScelto.b.isBurned)
+            {
+                double molt = calcoloDanno("fuoco");
+                int danno = (int)(42 * (pOpp.Atk * Convert.ToInt32(pScelto.b.dmg) / pScelto.Def) / 50 * molt);
+                int temp = pScelto.remHp - danno;
+                if (temp <= 0)
+                {
+                    pScelto.remHp = 0;
+                    pkLeft--;
+                    change_progress(0);
+                    change();
+                }
+                else
+                {
+                    pScelto.remHp = temp;
+                    change_progress(pScelto.remHp);
+                }
+            }
         }
     }
 }

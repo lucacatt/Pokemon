@@ -50,20 +50,20 @@ namespace Pokemon
             }
             string to_send = action + ";" + message;
             byte[] data = Encoding.ASCII.GetBytes(to_send);
-            sender.Send(data, data.Length, "localhost", 12346);
+            sender.Send(data, data.Length, "localhost", 12345);
         }
 
         public bool send_packet(string m)
         {
             UdpClient sender = new UdpClient();
             byte[] data = Encoding.ASCII.GetBytes(m);
-            sender.Send(data, data.Length, "localhost", 12346);
+            sender.Send(data, data.Length, "localhost", 12345);
             return true;
         }
 
         public void receive_packet()
         {
-            UdpClient receiver = new UdpClient(12345);
+            UdpClient receiver = new UdpClient(12346);
             IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
             byte[] dataReceived = receiver.Receive(ref riceveEP);
             string messaggio_ricevuto = Encoding.ASCII.GetString(dataReceived);
@@ -73,7 +73,7 @@ namespace Pokemon
         {
             try
             {
-                UdpClient listener = new UdpClient(12345);
+                UdpClient listener = new UdpClient(12346);
                 IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
                 while (c.Received_message == "")
                 {
@@ -213,7 +213,7 @@ namespace Pokemon
                 if (temp <= 0)
                 {
                     l.pOpp.remHp = 0;
-                    l.pkLeft--;
+                    //l.pkLeft--;
                     l.change_progressOpponent(0);
                 }
                 else
@@ -264,6 +264,7 @@ namespace Pokemon
             {
                 // chiusura partita esce vinto/perso
                 c.Received_message = "";
+                MessageBox.Show("HAI VINTO!");
             }
         }
 

@@ -255,54 +255,58 @@ namespace Pokemon
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
             {
-                for (int i = 0; i < pScelti.getSize(); i++)
+                if (pkLeft > 0)
                 {
-                    if (pScelti.getPkm(i).remHp > 0)
+                    for (int i = 0; i < pScelti.getSize(); i++)
                     {
-                        pScelto = pScelti.getPkm(i);
-                        comunicazione.send_packet("p", pScelti.getPkm(i).Nome + ";" + pScelti.getPkm(i).remHp + ";" + pkLeft + ";" + pScelti.getPkm(i).imgFront + ";");
-                        img_pkm.Source = set_pkm_image(i, 'b');
-                        pScelto = pScelti.getPkm(i);
-                        prg_hp_pkm.Maximum = pScelto.Hp;
-                        prg_hp_pkm.Value = pScelto.remHp;
-                        lbl_atk_pkm.Content = pScelto.Atk;
-                        lbl_df_pkm.Content = pScelto.Def;
-                        lbl_hp_pkm.Content = pScelto.Hp;
-                        check_HP(pScelto.remHp, pScelto.Index);
-                        lb_mosse.Items.Clear();
-                        for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
+                        if (pScelti.getPkm(i).remHp > 0)
                         {
-                            lb_mosse.Items.Add(pScelti.getPkm(i).getMossa(j).nome);
+                            pScelto = pScelti.getPkm(i);
+                            comunicazione.send_packet("p", pScelti.getPkm(i).Nome + ";" + pScelti.getPkm(i).remHp + ";" + pkLeft + ";" + pScelti.getPkm(i).imgFront + ";");
+                            img_pkm.Source = set_pkm_image(i, 'b');
+                            pScelto = pScelti.getPkm(i);
+                            prg_hp_pkm.Maximum = pScelto.Hp;
+                            prg_hp_pkm.Value = pScelto.remHp;
+                            lbl_atk_pkm.Content = pScelto.Atk;
+                            lbl_df_pkm.Content = pScelto.Def;
+                            lbl_hp_pkm.Content = pScelto.Hp;
+                            check_HP(pScelto.remHp, pScelto.Index);
+                            lb_mosse.Items.Clear();
+                            for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
+                            {
+                                lb_mosse.Items.Add(pScelti.getPkm(i).getMossa(j).nome);
+                            }
+                            break;
                         }
-                        break;
                     }
+                }
+                else
+                {
+                    MessageBox.Show("HAI PERSO!");
+                    comunicazione.send_packet("c", "");
                 }
             }));
         }
 
         public void first_dead()
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            for (int i = 0; i < pScelti.getSize(); i++)
             {
-                for (int i = 0; i < pScelti.getSize(); i++)
+                if (pScelti.getPkm(i).remHp == 0)
                 {
-                    if (pScelti.getPkm(i).remHp < 0)
+                    pScelto = pScelti.getPkm(i);
+                    comunicazione.send_packet("p", pScelti.getPkm(i).Nome + ";" + pScelti.getPkm(i).remHp + ";" + pkLeft + ";" + pScelti.getPkm(i).imgFront + ";");
+                    img_pkm.Source = set_pkm_image(i, 'b');
+                    prg_hp_pkm.Maximum = pScelto.Hp;
+                    prg_hp_pkm.Value = pScelto.remHp;
+                    lb_mosse.Items.Clear();
+                    for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
                     {
-                        pScelto = pScelti.getPkm(i);
-                        comunicazione.send_packet("p", pScelti.getPkm(i).Nome + ";" + pScelti.getPkm(i).remHp + ";" + pkLeft + ";" + pScelti.getPkm(i).imgFront + ";");
-                        img_pkm.Source = set_pkm_image(i, 'b');
-                        pScelto = pScelti.getPkm(i);
-                        prg_hp_pkm.Maximum = pScelto.Hp;
-                        prg_hp_pkm.Value = pScelto.remHp;
-                        lb_mosse.Items.Clear();
-                        for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
-                        {
-                            lb_mosse.Items.Add(pScelti.getPkm(i).getMossa(j).nome);
-                        }
-                        break;
+                        lb_mosse.Items.Add(pScelti.getPkm(i).getMossa(j).nome);
                     }
+                    break;
                 }
-            }));
+            }
         }
 
         public void check_HP(int hp, int index)
@@ -498,6 +502,7 @@ namespace Pokemon
                             prg_hp_pkm.Value = pScelto.remHp;
                             lbl_hp_pkm.Content = pScelto.remHp;
                             bruciatura();
+                            //comunicazione.send_packet("p", pScelto + ";" + pScelto.remHp + ";" + "" + ";" + "");
                             comunicazione.send_packet("og", Objs.getobj(3).Nome + ";");
                         }
                         else

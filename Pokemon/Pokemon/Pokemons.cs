@@ -23,6 +23,11 @@ namespace Pokemon
                 }
             }
         }
+
+        public int getIndex(int pos)
+        {
+            return pokemon[pos].Index;
+        }
         public string getImg(int pos)
         {
             return pokemon[pos].imgFront;

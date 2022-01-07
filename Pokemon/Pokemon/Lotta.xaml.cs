@@ -76,6 +76,7 @@ namespace Pokemon
             for (int i = 0; i < pScelti.getSize(); i++)
             {
                 lb_squadra.Items.Add(pScelti.getPkm(i).Nome);
+                pScelti.getPkm(i).Index = i;
             }
         }
         private void set_scenery()
@@ -128,6 +129,7 @@ namespace Pokemon
             prg_hp_pkm.Maximum = pScelti.getPkm(lb_squadra.SelectedIndex).Hp;
             prg_hp_pkm.Value = pScelti.getPkm(lb_squadra.SelectedIndex).remHp;
             mosse = pScelti.getPkm(lb_squadra.SelectedIndex).Mosse;
+            check_HP(pScelti.getPkm(lb_squadra.SelectedIndex).remHp, pScelti.getPkm(lb_squadra.SelectedIndex).Index);
             for (int i = 0; i < pScelti.getPkm(lb_squadra.SelectedIndex).Mosse.Count; i++)
             {
                 lb_mosse.Items.Add(pScelti.getPkm(lb_squadra.SelectedIndex).getMossa(i).nome);
@@ -180,10 +182,8 @@ namespace Pokemon
                 comunicazione.send_packet("p", pScelti.getPkm(lb_squadra.SelectedIndex).Nome + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).remHp + ";" + pkLeft + ";" + pScelti.getPkm(lb_squadra.SelectedIndex).imgFront + ";");
                 img_pkm.Source = set_pkm_image(lb_squadra.SelectedIndex, 'b');
                 pScelto = pScelti.getPkm(lb_squadra.SelectedIndex);
-                pScelto.Index = lb_squadra.SelectedIndex;
                 prg_hp_pkm.Maximum = pScelto.Hp;
                 prg_hp_pkm.Value = pScelto.remHp;
-                check_HP();
             }
             else
             {
@@ -199,19 +199,23 @@ namespace Pokemon
 
         private void btn_usa_Click(object sender, RoutedEventArgs e)
         {
-            if (comunicazione.getTurno() == true)
-                comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
-            else
-                MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (comunicazione.getTurno() == true)
+                    comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
+                else
+                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }));
         }
         public void change_progress(int hp)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
             {
+                prg_hp_pkm.Maximum = pScelto.Hp;
                 prg_hp_pkm.Value = hp;
                 lbl_hp_pkm.Content = hp;
                 pScelti.getPkm(lb_squadra.SelectedIndex).remHp = hp;
-                check_HP();
+                check_HP(pScelto.remHp, pScelto.Index);
             }));
         }
 
@@ -219,6 +223,7 @@ namespace Pokemon
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
             {
+                prg_hp_pkm_opp.Maximum = pOpp.Hp;
                 prg_hp_pkm_opp.Value = hp;
             }));
         }
@@ -237,6 +242,10 @@ namespace Pokemon
                         pScelto = pScelti.getPkm(i);
                         prg_hp_pkm.Maximum = pScelto.Hp;
                         prg_hp_pkm.Value = pScelto.remHp;
+                        lbl_atk_pkm.Content = pScelto.Atk;
+                        lbl_df_pkm.Content = pScelto.Def;
+                        lbl_hp_pkm.Content = pScelto.Hp;
+                        check_HP(pScelto.remHp, pScelto.Index);
                         lb_mosse.Items.Clear();
                         for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
                         {
@@ -273,22 +282,36 @@ namespace Pokemon
             }));
         }
 
-        public void check_HP()
+        public void check_HP(int hp, int index)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            if (hp > (get_by_index(index).Hp * 0.75))
+                change_GREENYELLOW();
+            else if (hp > (get_by_index(index).Hp * 0.5))
+                change_LIGHTGREEN();
+            else if (hp > (get_by_index(index).Hp * 0.3))
+                change_YELLOW();
+            else if (hp > (get_by_index(index).Hp * 0.2))
+                change_ORANGE();
+            else if (hp > (get_by_index(index).Hp * 0.1))
+                change_ORANGERED();
+            else if (hp == 0)
+                change_RED();
+        }
+        
+        public Pokem get_by_index(int index)
+        {
+            for (int i = 0; i < pScelti.getSize(); i++)
             {
-                if (pScelto.remHp > (pScelto.Hp * 0.75))
-                    change_GREENYELLOW();
-                else if (pScelto.remHp > (pScelto.Hp * 0.5))
-                    change_LIGHTGREEN();
-                else if (pScelto.remHp > (pScelto.Hp * 0.3))
-                    change_YELLOW();
-                else if (pScelto.remHp > (pScelto.Hp * 0.2))
-                    change_ORANGE();
-                else if (pScelto.remHp > (pScelto.Hp * 0.1))
-                    change_ORANGERED();
-
-            }));
+                if (index == pScelti.getIndex(i))
+                {
+                    return pScelti.getPkm(i);
+                }
+            }
+            return new Pokem();
+        }
+        public void change_RED()
+        {
+            lbl_hp_pkm.Background = Brushes.Red;
         }
 
         public void change_ORANGERED()
@@ -333,8 +356,8 @@ namespace Pokemon
                                 pScelto.remHp += 20;
                                 obj_1_rem -= 1;
                                 lbl_rem1.Content = obj_1_rem;
-                                check_HP();
-                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                check_HP(pScelto.remHp, pScelto.Index);
+                                prg_hp_pkm.Maximum = pScelto.Hp;
                                 prg_hp_pkm.Value = pScelto.remHp;
                                 lbl_hp_pkm.Content = pScelto.remHp;
                             }
@@ -343,8 +366,8 @@ namespace Pokemon
                                 pScelto.remHp = pScelto.Hp;
                                 obj_1_rem -= 1;
                                 lbl_rem1.Content = obj_1_rem;
-                                check_HP();
-                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                check_HP(pScelto.remHp, pScelto.Index);
+                                prg_hp_pkm.Maximum = pScelto.Hp;
                                 prg_hp_pkm.Value = pScelto.remHp;
                                 lbl_hp_pkm.Content = pScelto.remHp;
                             }
@@ -375,8 +398,8 @@ namespace Pokemon
                                 pScelto.remHp += 60;
                                 obj_2_rem -= 1;
                                 lbl_rem2.Content = obj_2_rem;
-                                check_HP();
-                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                check_HP(pScelto.remHp, pScelto.Index);
+                                prg_hp_pkm.Maximum = pScelto.Hp;
                                 prg_hp_pkm.Value = pScelto.remHp;
                                 lbl_hp_pkm.Content = pScelto.remHp;
                             }
@@ -385,8 +408,8 @@ namespace Pokemon
                                 pScelto.remHp = pScelto.Hp;
                                 obj_2_rem -= 1;
                                 lbl_rem1.Content = obj_2_rem;
-                                check_HP();
-                                prg_hp_pkm.Maximum = pScelto.remHp;
+                                check_HP(pScelto.remHp, pScelto.Index);
+                                prg_hp_pkm.Maximum = pScelto.Hp;
                                 prg_hp_pkm.Value = pScelto.remHp;
                                 lbl_hp_pkm.Content = pScelto.remHp;
                             }
@@ -414,9 +437,9 @@ namespace Pokemon
                             //DA VEDERE EFFETTI
                             pScelto.remHp = pScelto.Hp;
                             obj_3_rem -= 1;
-                            check_HP();
+                            check_HP(pScelto.remHp, pScelto.Index);
                             lbl_rem3.Content = obj_3_rem;
-                            prg_hp_pkm.Maximum = pScelto.remHp;
+                            prg_hp_pkm.Maximum = pScelto.Hp;
                             prg_hp_pkm.Value = pScelto.remHp;
                             lbl_hp_pkm.Content = pScelto.remHp;
                             comunicazione.send_packet("og", Objs.getobj(2).Nome + ";");
@@ -444,8 +467,8 @@ namespace Pokemon
                             pScelto.remHp = (pScelto.Hp / 2);
                             obj_4_rem -= 1;
                             lbl_rem4.Content = obj_4_rem;
-                            check_HP();
-                            prg_hp_pkm.Maximum = pScelto.remHp;
+                            check_HP(pScelto.remHp, pScelto.Index);
+                            prg_hp_pkm.Maximum = pScelto.Hp;
                             prg_hp_pkm.Value = pScelto.remHp;
                             lbl_hp_pkm.Content = pScelto.remHp;
                             comunicazione.send_packet("og", Objs.getobj(3).Nome + ";");

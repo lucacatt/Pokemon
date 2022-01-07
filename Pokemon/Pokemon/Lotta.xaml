@@ -69,9 +69,9 @@
         <Image x:Name="img_pkm" HorizontalAlignment="Left" Height="310" Margin="144,194,0,0" VerticalAlignment="Top" Width="310"/>
         <Image x:Name="img_pkm_opp" HorizontalAlignment="Left" Height="310" Margin="464,66,0,0" VerticalAlignment="Top" Width="310"/>
         <ProgressBar x:Name="prg_hp_pkm_opp" HorizontalAlignment="Left" Height="11" Margin="529,120,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
-        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="529,118,0,0" VerticalAlignment="Top" Width="180"/>
+        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="526,118,0,0" VerticalAlignment="Top" Width="186"/>
         <ProgressBar x:Name="prg_hp_pkm" HorizontalAlignment="Left" Height="11" Margin="211,461,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
-        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="211,460,0,0" VerticalAlignment="Top" Width="180"/>
+        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="209,460,0,0" VerticalAlignment="Top" Width="184"/>
         <Rectangle HorizontalAlignment="Center" Height="91" Margin="0,733,0,0" Stroke="Black" VerticalAlignment="Top" Width="1112" RadiusX="11" RadiusY="11"/>
         <Label Content="OGGETTI" HorizontalAlignment="Left" Margin="58,762,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="92" Height="34" FontSize="18"/>
         <Rectangle HorizontalAlignment="Left" Height="78" Margin="174,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>

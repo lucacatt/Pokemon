@@ -45,7 +45,9 @@ namespace Pokemon
                 turno = false;
             }
             if (action == "og")
+            {
                 turno = false;
+            }
             string to_send = action + ";" + message;
             byte[] data = Encoding.ASCII.GetBytes(to_send);
             sender.Send(data, data.Length, "localhost", 12346);
@@ -164,11 +166,10 @@ namespace Pokemon
                 c.Received_message = "";
                 double molt = calcoloDanno(splitted_message[4]);
                 int danno = (int)(42 * (l.pOpp.Atk * Convert.ToInt32(splitted_message[2]) / l.pScelto.Def) / 50 * molt);
-                int temp = l.pScelto.remHp -= danno;
+                int temp = (l.pScelto.remHp - danno);
                 if (temp <= 0)
                 {
                     l.pScelto.remHp = 0;
-                    l.lbl_hp_pkm.Content = l.pScelto.remHp;
                     l.pkLeft--;
                     l.change_progress(0);
                     l.change();
@@ -201,38 +202,33 @@ namespace Pokemon
             else if (splitted_message[0] == "og")
             {
                 // oggetto (nome oggetto)
+                setTurno(1);
                 c.Received_message = "";
                 if (splitted_message[1] == "pozione")
                 {
                     l.pOpp.remHp += 20;
                     l.change_progressOpponent(l.pOpp.remHp);
-                    setTurno(0);
                     MessageBox.Show("usata pozione");
                 }
                 else if (splitted_message[1] == "superpozione")
                 {
                     l.pOpp.remHp += 60;
                     l.change_progressOpponent(l.pOpp.remHp);
-                    setTurno(0);
                     MessageBox.Show("usata superpozione");
                 }
                 else if (splitted_message[1] == "ricaricatotale")
                 {
                     l.pOpp.remHp = l.pOpp.Hp;
                     l.change_progressOpponent(l.pOpp.remHp);
-                    setTurno(0);
                     //ricarica effetti !!
                     MessageBox.Show("usata ricaricatotale");
                 }
                 else if (splitted_message[1] == "revitalizzante")
                 {
-                    setTurno(0);
                     MessageBox.Show("usata revitalizzante");
                 }
                 else if (splitted_message[1] == "proteina")
                 {
-
-                    setTurno(0);
                     MessageBox.Show("usata proteina");
                 }
             }

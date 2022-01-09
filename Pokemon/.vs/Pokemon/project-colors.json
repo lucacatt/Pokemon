@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "770751a4-9a74-47ad-9cb3-ceff8ed0ce6f": {
+      "ProjectGuid": "770751a4-9a74-47ad-9cb3-ceff8ed0ce6f",
+      "DisplayName": "Pokemon",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

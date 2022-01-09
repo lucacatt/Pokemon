@@ -114,11 +114,26 @@ namespace Pokemon
         {
             if (pScelti.getPokems().Count < 6)
             {
-                pScelti.addPkm(p.getPkm(posScelta));
-                lb.Items.Add(p.getPkm(posScelta).Nome);
+                if (!doppioni())
+                {
+                    MessageBox.Show("Pokemon uguali non ammessi", "Impossibile aggiungere", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
                 MessageBox.Show("Squadra al completo", "Impossibile aggiungere", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        private bool doppioni()
+        {
+            for (int i = 0; i < pScelti.getPokems().Count; i++)
+            {
+                if (p.getPkm(posScelta) == pScelti.getPokems()[i])
+                {
+                    return false;
+                }
+            }
+            pScelti.addPkm(p.getPkm(posScelta));
+            lb.Items.Add(p.getPkm(posScelta).Nome);
+            return true;
         }
 
         private void btnStats_Click(object sender, RoutedEventArgs e)

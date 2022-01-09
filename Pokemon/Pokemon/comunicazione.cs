@@ -14,14 +14,22 @@ namespace Pokemon
         condivisa c;
         Lotta l;
         Mostra_Squadra ms;
+        Pokemons pScelti;
         static bool turno { get; set; }
         public string nome { get; set; }
+        bool control;
+
+        IndirizziIP ip;
         public comunicazione(Mostra_Squadra m)
         {
+            pScelti = Mostra_Squadra.pScelti_per_lotta;
             c = new condivisa();
             l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
             ms = m;
             turno = true;
+            ip = new IndirizziIP();
+            ip.leggi();
+            control = true;
         }
 
         public void setTurno(int setter)
@@ -37,20 +45,29 @@ namespace Pokemon
             return turno;
         }
 
+        public static string Ip { get; set; }
+
         public static void send_packet(string action, string message)
         {
-            UdpClient sender = new UdpClient();
-            if (action == "at")
+            try
             {
-                turno = false;
+                UdpClient sender = new UdpClient();
+                if (action == "at")
+                {
+                    turno = false;
+                }
+                if (action == "og")
+                {
+                    turno = false;
+                }
+                string to_send = action + ";" + message;
+                byte[] data = Encoding.ASCII.GetBytes(to_send);
+                sender.Send(data, data.Length, Ip, 12345);
             }
-            if (action == "og")
+            catch (Exception e)
             {
-                turno = false;
+                MessageBox.Show("Indirizzo ip errato! Controlla la sintassi delll'inidirzzo immesso ricordandoti che un indirizzo IP è composto come NNN.NNN.NNN.NNN", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            string to_send = action + ";" + message;
-            byte[] data = Encoding.ASCII.GetBytes(to_send);
-            sender.Send(data, data.Length, "localhost", 12345);
         }
 
         public bool send_packet(string m)
@@ -93,7 +110,12 @@ namespace Pokemon
             string[] splitted_message = c.Received_message.Split(";");
             if (splitted_message[1] != "")
             {
-                c.Opponent = splitted_message[1];
+                if (control == true)
+                {
+                    c.Opponent = splitted_message[1];
+                    l.set_nOpp(splitted_message[1]);
+                    control = false;
+                }
             }
             if (splitted_message[0] == "a")
             {
@@ -102,7 +124,7 @@ namespace Pokemon
                 if (MessageBox.Show("Accettare la richiesta di gioco da " + c.Opponent + "?", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     //invia y
-                    send_packet("y", nome); // da vedere nome!!
+                    send_packet("y", nome);
                     setTurno(0);
                 }
                 else
@@ -119,8 +141,14 @@ namespace Pokemon
                 if (MessageBox.Show("Vuoi davvero accedere al gioco contro " + c.Opponent + "?", "Accedere?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     //invia y
-                    send_packet("y", ""); // da vedere nome!!
+                    send_packet("y", "");
                     setTurno(1);
+                    IndirizzoIP i = new IndirizzoIP(c.Opponent, Ip);
+                    if (!ip.contains(i))
+                    {
+                        ip.aggiungiIndirizzo(i);
+                        ip.scrivi();
+                    }
                     MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
@@ -131,11 +159,24 @@ namespace Pokemon
                 {
                     // invia n
                     send_packet("n", "");
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        Mostra_Squadra m = new Mostra_Squadra(pScelti, nome, 'n');
+                        m.Show();
+                        MessageBox.Show("Hai rifiutato la richiesta di " + c.Opponent, "Connessione fallita", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }));
+
                 }
             }
             else if (splitted_message[0] == "y")
             {
                 c.Received_message = "";
+                IndirizzoIP i = new IndirizzoIP(c.Opponent, Ip);
+                if (!ip.contains(i))
+                {
+                    ip.aggiungiIndirizzo(i);
+                    ip.scrivi();
+                }
                 MessageBox.Show("Connessione con " + c.Opponent + " stabilita con successo!", "Connessione stabilita", MessageBoxButton.OK, MessageBoxImage.Information);
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
@@ -147,6 +188,12 @@ namespace Pokemon
             {
                 // chiude
                 c.Received_message = "";
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    Mostra_Squadra m = new Mostra_Squadra(pScelti, nome, 'n');
+                    m.Show();
+                    MessageBox.Show(c.Opponent + " ha rifiutato la tua richiesta", "Connessione fallita", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }));
             }
             else if (splitted_message[0] == "p")
             {
@@ -253,6 +300,8 @@ namespace Pokemon
                 }
                 else if (splitted_message[1] == "revitalizzante")
                 {
+                    l.pOpp.remHp = l.pOpp.Hp / 2;
+                    l.change_progressOpponent(l.pOpp.remHp);
                     MessageBox.Show("usata revitalizzante");
                 }
                 else if (splitted_message[1] == "proteina")

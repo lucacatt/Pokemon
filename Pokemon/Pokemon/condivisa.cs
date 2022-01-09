@@ -6,11 +6,8 @@ namespace Pokemon
 {
     class condivisa
     {
-        private string received_message;
-        private string opponent;
-
-        public string Received_message { get => received_message; set => received_message = value; }
-        public string Opponent { get => opponent; set => opponent = value; }
+        public string Received_message { get; set; }
+        public string Opponent { get; set; }
 
         public condivisa()
         {

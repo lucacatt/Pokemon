@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ge2p5nPK9WBJClXjzYBc8TylWBEYZghYaytI3NCAUw2+77Sx+soPe5Jz9jlZj0Q9SsmrLe/1EYgRjVqLfLG3Dw==",
+  "dgSpecHash": "oUmVVPWPyDVj+lQ9oB6pr24xrp536Y4gVEmYSGEZSrZhoqfkks7Em/aS/uWfbFwHfwciEYIIUIfmbIiS3RqC0Q==",
   "success": true,
-  "projectFilePath": "L:\\Github\\Pokemon\\Pokemon\\Pokemon\\Pokemon.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Luca Cattaneo\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512",
-    "C:\\Users\\Luca Cattaneo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\Luca Cattaneo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\Luca Cattaneo\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
-  ],
+  "projectFilePath": "E:\\POKEMON SHOWDOWN\\Pokemon-main\\Pokemon\\Pokemon\\Pokemon.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -20,8 +20,28 @@ namespace Pokemon
         Pokemons pScelti;
         comunicazione c;
         public static Pokemons pScelti_per_lotta;
+        IndirizziIP ip;
 
         public Mostra_Squadra(Pokemons pScelti, string nome)
+        {
+            InitializeComponent();
+            this.pScelti = pScelti;
+            pScelti_per_lotta = pScelti;
+            c = new comunicazione(this);
+            ip = new IndirizziIP();
+
+            set_scenery();
+            set_names();
+            set_img();
+            set_stats();
+            set_ip();
+
+            c = new comunicazione(this);
+            c.nome = nome;
+            c.start_thread_listen();
+        }
+
+        public Mostra_Squadra(Pokemons pScelti, string nome, char do_not_start_thread)
         {
             InitializeComponent();
             this.pScelti = pScelti;
@@ -32,10 +52,18 @@ namespace Pokemon
             set_names();
             set_img();
             set_stats();
-
+            set_ip();
             c = new comunicazione(this);
             c.nome = nome;
-            c.start_thread_listen();
+        }
+
+        public void set_ip()
+        {
+            ip.leggi();
+            for (int i = 0; i < ip.getSize(); i++)
+            {
+                cmb_ip.Items.Add(ip.getNome(i) + " --> " + ip.getIndirizzo(i));
+            }
         }
 
         private void set_names()
@@ -115,13 +143,14 @@ namespace Pokemon
 
         private void btn_home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow home = new MainWindow();
+            MainWindow home = new MainWindow(pScelti);
             this.Close();
             home.Show();
         }
 
         private void set_scenery()
         {
+
             Uri uri_s = new Uri(AppDomain.CurrentDomain.BaseDirectory + "la_tua_squadra.png");
             BitmapImage img_s = new BitmapImage(uri_s);
             ImageBrush brush_s = new ImageBrush(img_s);
@@ -143,8 +172,59 @@ namespace Pokemon
 
         private void btnLotta_Click(object sender, RoutedEventArgs e)
         {
-            comunicazione.send_packet("a", c.nome);
-            Close();
+            if (controlla_ip())
+            {
+                comunicazione.Ip = ip_dest.Text.Trim();
+                comunicazione.send_packet("a", c.nome);
+                Close();
+            }
+            else
+                MessageBox.Show("Indirizzo IP errato!!", "IP Errato", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
+
+        public bool controlla_ip()
+        {
+            string ip = ip_dest.Text.Trim();
+            string[] controllo = ip.Split('.');
+            try
+            {
+                if (controllo[0] == "localhost")
+                    return true;
+                else if (Convert.ToInt32(controllo[0]) >= 0 && Convert.ToInt32(controllo[0]) <= 223)
+                {
+                    if (Convert.ToInt32(controllo[1]) > 0 && Convert.ToInt32(controllo[1]) < 255)
+                    {
+                        if (Convert.ToInt32(controllo[2]) > 0 && Convert.ToInt32(controllo[2]) < 255)
+                        {
+                            if (Convert.ToInt32(controllo[3]) > 0 && Convert.ToInt32(controllo[3]) < 255)
+                                return true;
+                            else
+                                return false;
+                        }
+                        else
+                            return false;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        private void cmb_ip_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ip_dest.Text = ip.getIndirizzo(cmb_ip.SelectedIndex);
+        }
+
+        private void txt_ip_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //cmb_ip.SelectedIndex = -1;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<Window x:Class="Pokemon.Mostra_Squadra"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -63,7 +63,7 @@
         <Rectangle HorizontalAlignment="Left" Height="396" Margin="227,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="203"/>
         <Rectangle HorizontalAlignment="Left" Height="396" Margin="24,90,0,0" Stroke="Black" VerticalAlignment="Top" Width="203"/>
         <Label x:Name="lbl_info" Content="" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="62" Margin="430,13,0,0" VerticalAlignment="Top" Width="406" FontSize="36" FontWeight="Bold"/>
-        <Button x:Name="btnLotta" Content="" HorizontalAlignment="Left" Margin="686,613,0,0" VerticalAlignment="Top" Width="235" Height="127" Cursor="Hand" Click="btnLotta_Click">
+        <Button x:Name="btnLotta" Content="" HorizontalAlignment="Left" Margin="876,609,0,0" VerticalAlignment="Top" Width="234" Height="127" Cursor="Hand" Click="btnLotta_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -103,6 +103,9 @@
                 </Style>
             </Button.Style>
         </Button>
-
+        <ComboBox x:Name="cmb_ip" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Height="36" Margin="640,684,0,0" VerticalAlignment="Top" Width="215" SelectionChanged="cmb_ip_SelectionChanged" FontSize="14"/>
+        <TextBox x:Name="ip_dest" HorizontalAlignment="Left" Height="34" Margin="640,645,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="215" FontSize="14" TextAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Left" Height="126" Margin="630,606,0,0" Stroke="Black" VerticalAlignment="Top" Width="236"/>
+        <Label Content="IP AVVERSARIO" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="34" Margin="642,611,0,0" VerticalAlignment="Top" Width="213" FontSize="16"/>
     </Grid>
 </Window>

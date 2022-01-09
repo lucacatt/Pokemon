@@ -32,6 +32,7 @@ namespace Pokemon
         int obj_5_rem;
         int obj_6_rem;
         int nTurno;
+
         public Lotta(Pokemons pScelti)
         {
             InitializeComponent();
@@ -43,6 +44,14 @@ namespace Pokemon
             nTurno = 0;
             set_listbox();
             set_scenery();
+        }
+
+        public void set_nOpp(string nOpp)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                lbl_opp.Content = "Stai giocando contro " + nOpp;
+            }));
         }
 
         public void pkm_opp_received(Pokem pkm_opp, int pkm_remained)

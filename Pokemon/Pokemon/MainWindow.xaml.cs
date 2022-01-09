@@ -26,11 +26,25 @@ namespace Pokemon
         public MainWindow()
         {
             InitializeComponent();
+            set_scenery();
+        }
 
+        public MainWindow(Pokemons pScelti)
+        {
+            InitializeComponent();
+            this.pScelti = pScelti;
+            set_scenery();
+            for (int i = 0; i < pScelti.getSize(); i++)
+            {
+                lb.Items.Add(pScelti.getPkm(i).Nome);
+            }
+        }
+
+        public void set_scenery()
+        {
             Tipi.Instance.leggi(AppDomain.CurrentDomain.BaseDirectory + "tipi.txt");
             p.leggi(AppDomain.CurrentDomain.BaseDirectory + "pokemon.txt");
             showImg(p.getImg(posScelta));
-            //mod bonfi
             lbl_nome_pkm.Content = p.getPkm(posScelta).Nome;
             Uri uri = new Uri(AppDomain.CurrentDomain.BaseDirectory + "sfondopkm.jpg");
             BitmapImage img = new BitmapImage(uri);
@@ -58,7 +72,6 @@ namespace Pokemon
             btnStats.Background = brush_st;
         }
 
-
         private void btnIdietro_Click(object sender, RoutedEventArgs e)
         {
             if (posScelta > 0)
@@ -66,10 +79,8 @@ namespace Pokemon
                 posScelta--;
                 var fullFilePath = p.getImg(posScelta);
                 showImg(fullFilePath);
-                //mod bonfi
                 lbl_nome_pkm.Content = p.getPkm(posScelta).Nome;
             }
-            //mod bonfi
             else
             {
                 posScelta = p.getSize() - 1;
@@ -97,10 +108,8 @@ namespace Pokemon
                 posScelta++;
                 var fullFilePath = p.getImg(posScelta);
                 showImg(fullFilePath);
-                //mod bonfi
                 lbl_nome_pkm.Content = p.getPkm(posScelta).Nome;
             }
-            //mod bonfi
             else
             {
                 posScelta = 0;
@@ -128,7 +137,7 @@ namespace Pokemon
             {
                 if (p.getPkm(posScelta) == pScelti.getPokems()[i])
                 {
-                    return false;
+                    return false; 
                 }
             }
             pScelti.addPkm(p.getPkm(posScelta));

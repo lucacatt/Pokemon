@@ -1,16 +1,16 @@
 ﻿<Window x:Class="Pokemon.Lotta"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokemon"
         mc:Ignorable="d"
-        Title="Lotta" Height="866" Width="1164">
+        Title="Lotta" Height="877" Width="1164">
     <Grid>
         <ListBox x:Name="lb_squadra" HorizontalAlignment="Left" Height="334" Margin="884,118,0,0" VerticalAlignment="Top" Width="250" FontSize="18" SelectionChanged="lb_squadra_SelectionChanged"/>
         <Label x:Name="lbl_pkm" Content="" HorizontalAlignment="Left" Height="47" Margin="884,66,0,0" VerticalAlignment="Top" Width="250"/>
-        <Button x:Name="btn_selez" Content="" HorizontalAlignment="Left" Height="51" Margin="904,457,0,0" VerticalAlignment="Top" Width="210" Cursor="Hand" Click="btn_selez_Click">
+        <Button x:Name="btn_selez" Content="" HorizontalAlignment="Left" Height="51" Margin="904,458,0,0" VerticalAlignment="Top" Width="210" Cursor="Hand" Click="btn_selez_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
@@ -64,14 +64,13 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="41" Margin="298,4,0,0" VerticalAlignment="Top" Width="284" FontSize="18" FontWeight="Bold"/>
         <Image x:Name="background" HorizontalAlignment="Left" Height="485" Margin="26,45,0,0" VerticalAlignment="Top" Width="824"/>
         <Image x:Name="img_pkm" HorizontalAlignment="Left" Height="310" Margin="144,194,0,0" VerticalAlignment="Top" Width="310"/>
         <Image x:Name="img_pkm_opp" HorizontalAlignment="Left" Height="310" Margin="464,66,0,0" VerticalAlignment="Top" Width="310"/>
         <ProgressBar x:Name="prg_hp_pkm_opp" HorizontalAlignment="Left" Height="11" Margin="529,120,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
         <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="526,118,0,0" VerticalAlignment="Top" Width="186"/>
-        <ProgressBar x:Name="prg_hp_pkm" HorizontalAlignment="Left" Height="11" Margin="211,461,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
-        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="209,460,0,0" VerticalAlignment="Top" Width="184"/>
+        <ProgressBar x:Name="prg_hp_pkm" HorizontalAlignment="Left" Height="11" Margin="211,462,0,0" VerticalAlignment="Top" Width="180" BorderBrush="Black" BorderThickness="1,1,1,1" Background="Red"/>
+        <Border BorderThickness="3,3,3,3" BorderBrush="Black" HorizontalAlignment="Left" Height="13" Margin="209,461,0,0" VerticalAlignment="Top" Width="184"/>
         <Rectangle HorizontalAlignment="Center" Height="91" Margin="0,733,0,0" Stroke="Black" VerticalAlignment="Top" Width="1112" RadiusX="11" RadiusY="11"/>
         <Label Content="OGGETTI" HorizontalAlignment="Left" Margin="58,762,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="92" Height="34" FontSize="18"/>
         <Rectangle HorizontalAlignment="Left" Height="78" Margin="174,740,0,0" Stroke="Black" VerticalAlignment="Top" Width="154" RadiusX="11" RadiusY="11"/>
@@ -92,5 +91,6 @@
         <Button x:Name="btn_ogg4" Content="" HorizontalAlignment="Left" Height="65" Margin="662,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg4_Click" FontWeight="Bold" FontSize="13"/>
         <Button x:Name="btn_ogg5" Content="" HorizontalAlignment="Left" Height="65" Margin="821,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg5_Click" FontWeight="Bold" FontSize="13"/>
         <Button x:Name="btn_ogg6" Content="" HorizontalAlignment="Left" Height="65" Margin="980,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg6_Click" FontWeight="Bold" FontSize="13"/>
+        <Label x:Name="lbl_opp" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="44" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="825" FontSize="18" FontWeight="Bold" Background="#00000000" Margin="26,-2,0,0"/>
     </Grid>
 </Window>

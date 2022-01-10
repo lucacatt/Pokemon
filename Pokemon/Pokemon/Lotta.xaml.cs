@@ -291,8 +291,10 @@ namespace Pokemon
                 }
                 else
                 {
-                    MessageBox.Show("HAI PERSO!");
-                    comunicazione.send_packet("c", "");
+                    comunicazione.send_packet("c", "p");
+                    Sconfitta sconfitta=new Sconfitta();
+                    Close();
+                    sconfitta.Show();
                 }
             }));
         }

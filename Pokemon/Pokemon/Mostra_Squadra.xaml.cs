@@ -172,14 +172,14 @@ namespace Pokemon
 
         private void btnLotta_Click(object sender, RoutedEventArgs e)
         {
-            if (controlla_ip())
-            {
+            //if (controlla_ip())
+            //{
                 comunicazione.Ip = ip_dest.Text.Trim();
                 comunicazione.send_packet("a", c.nome);
                 Close();
-            }
-            else
-                MessageBox.Show("Indirizzo IP errato!!", "IP Errato", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            //else
+            //    MessageBox.Show("Indirizzo IP errato!!", "IP Errato", MessageBoxButton.OK, MessageBoxImage.Error);
 
         }
 

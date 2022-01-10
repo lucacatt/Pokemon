@@ -13,7 +13,13 @@
     <Compile Update="Mostra_Squadra.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Sconfitta.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Statistiche.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Vittoria.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -27,7 +33,13 @@
     <Page Update="Mostra_Squadra.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Sconfitta.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Statistiche.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Vittoria.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

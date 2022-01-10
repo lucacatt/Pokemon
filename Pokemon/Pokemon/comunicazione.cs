@@ -62,11 +62,13 @@ namespace Pokemon
                 }
                 string to_send = action + ";" + message;
                 byte[] data = Encoding.ASCII.GetBytes(to_send);
+                MessageBox.Show(Ip);
                 sender.Send(data, data.Length, Ip, 12345);
             }
             catch (Exception e)
             {
-                MessageBox.Show("Indirizzo ip errato! Controlla la sintassi delll'inidirzzo immesso ricordandoti che un indirizzo IP è composto come NNN.NNN.NNN.NNN", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("Indirizzo ip errato! Controlla la sintassi dell'indirizzo immesso ricordandoti che un indirizzo IP è composto come NNN.NNN.NNN.NNN", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -95,6 +97,7 @@ namespace Pokemon
                 while (c.Received_message == "")
                 {
                     byte[] dataReceived = listener.Receive(ref riceveEP);
+                    Ip = riceveEP.Address.ToString();
                     c.Received_message = Encoding.ASCII.GetString(dataReceived);
                     message_control();
                 }
@@ -311,9 +314,13 @@ namespace Pokemon
             }
             else if (splitted_message[0] == "c")
             {
-                // chiusura partita esce vinto/perso
-                c.Received_message = "";
-                MessageBox.Show("HAI VINTO!");
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    // chiusura partita esce vinto/perso
+                    Vittoria vittoria = new Vittoria();
+                    l.Close();
+                    vittoria.Show();
+                }));                
             }
         }
 

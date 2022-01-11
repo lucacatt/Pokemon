@@ -54,6 +54,118 @@ namespace Pokemon
             }));
         }
 
+        public void attacco_a_nemico(char controllo)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (controllo == 'b')
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "bruciatura.png"), UriKind.Absolute);
+                    bitmap.EndInit();
+                    img_mossa.Stretch = Stretch.Fill;
+                    img_mossa.StretchDirection = StretchDirection.Both;
+                    img_mossa.Source = bitmap;
+                }
+                else if(controllo == 'a')
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "addormenta.png"), UriKind.Absolute);
+                    bitmap.EndInit();
+                    img_mossa.Stretch = Stretch.Fill;
+                    img_mossa.StretchDirection = StretchDirection.Both;
+                    img_mossa.Source = bitmap;
+                }
+                else if(controllo == 'p')
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "paralizza.png"), UriKind.Absolute);
+                    bitmap.EndInit();
+                    img_mossa.Stretch = Stretch.Fill;
+                    img_mossa.StretchDirection = StretchDirection.Both;
+                    img_mossa.Source = bitmap;
+                }
+            }));
+        }
+
+        public void rem_atk()
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                Thread.Sleep(3000);
+                img_mossa.Source = new BitmapImage();
+            }));
+        }
+
+        public void attacco_da_nemico(char controllo)
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                if (controllo == 'b')
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "bruciatura.png"), UriKind.Absolute);
+                    bitmap.EndInit();
+                    BitmapImage bitmap_pkm = new BitmapImage();
+                    bitmap_pkm.BeginInit();
+                    bitmap_pkm.UriSource = new Uri(pScelto.imgFront, UriKind.Absolute);
+                    bitmap_pkm.EndInit();
+                    img_pkm.Source = bitmap_pkm;
+                    img_mossa_rec.Stretch = Stretch.Fill;
+                    img_mossa_rec.StretchDirection = StretchDirection.Both;
+                    img_mossa_rec.Source = bitmap;
+                }
+                else if (controllo == 'a')
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "addormenta.png"), UriKind.Absolute);
+                    bitmap.EndInit();
+                    BitmapImage bitmap_pkm = new BitmapImage();
+                    bitmap_pkm.BeginInit();
+                    bitmap_pkm.UriSource = new Uri(pScelto.imgFront, UriKind.Absolute);
+                    bitmap_pkm.EndInit();
+                    img_pkm.Source = bitmap_pkm;
+                    img_mossa_rec.Stretch = Stretch.Fill;
+                    img_mossa_rec.StretchDirection = StretchDirection.Both;
+                    img_mossa_rec.Source = bitmap;
+                }
+                else if (controllo == 'p')
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "paralizza.png"), UriKind.Absolute);
+                    bitmap.EndInit(); 
+                    BitmapImage bitmap_pkm = new BitmapImage();
+                    bitmap_pkm.BeginInit();
+                    bitmap_pkm.UriSource = new Uri(pScelto.imgFront, UriKind.Absolute);
+                    bitmap_pkm.EndInit();
+                    img_pkm.Source = bitmap_pkm;
+                    img_mossa_rec.Stretch = Stretch.Fill;
+                    img_mossa_rec.StretchDirection = StretchDirection.Both;
+                    img_mossa_rec.Source = bitmap;
+                }
+            }));
+        }
+
+        public void rem_rec()
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
+            {
+                Thread.Sleep(3000);
+                img_mossa_rec.Source = new BitmapImage();
+                BitmapImage bitmap_pkm = new BitmapImage();
+                bitmap_pkm.BeginInit();
+                bitmap_pkm.UriSource = new Uri(pScelto.imgBack, UriKind.Absolute);
+                bitmap_pkm.EndInit();
+                img_pkm.Source = bitmap_pkm;
+            }));
+        }
+
         public void pkm_opp_received(Pokem pkm_opp, int pkm_remained)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
@@ -292,7 +404,7 @@ namespace Pokemon
                 else
                 {
                     comunicazione.send_packet("c", "p");
-                    Sconfitta sconfitta=new Sconfitta();
+                    Sconfitta sconfitta = new Sconfitta();
                     Close();
                     sconfitta.Show();
                 }

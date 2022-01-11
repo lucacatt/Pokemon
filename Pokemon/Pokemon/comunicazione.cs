@@ -13,18 +13,20 @@ namespace Pokemon
     {
         condivisa c;
         Lotta l;
+        static Lotta lotta;
         Mostra_Squadra ms;
         Pokemons pScelti;
         static bool turno { get; set; }
         public string nome { get; set; }
         bool control;
-
         IndirizziIP ip;
+
         public comunicazione(Mostra_Squadra m)
         {
             pScelti = Mostra_Squadra.pScelti_per_lotta;
             c = new condivisa();
             l = new Lotta(Mostra_Squadra.pScelti_per_lotta);
+            lotta = l;
             ms = m;
             turno = true;
             ip = new IndirizziIP();
@@ -47,6 +49,11 @@ namespace Pokemon
 
         public static string Ip { get; set; }
 
+        public static Lotta getL()
+        {
+            return lotta;
+        }
+
         public static void send_packet(string action, string message)
         {
             try
@@ -55,6 +62,22 @@ namespace Pokemon
                 if (action == "at")
                 {
                     turno = false;
+                    string[] msg = message.Split(";");
+                    if(msg[2] == "SCOTTA")
+                    {
+                        getL().attacco_a_nemico('b');
+                        getL().rem_atk();
+                    }
+                    else if(msg[2] == "ADDORMENTA")
+                    {
+                        getL().attacco_a_nemico('a');
+                        getL().rem_atk();
+                    }
+                    else if(msg[2] == "PARALIZZA")
+                    {
+                        getL().attacco_a_nemico('p');
+                        getL().rem_atk();
+                    }
                 }
                 if (action == "og")
                 {
@@ -62,13 +85,13 @@ namespace Pokemon
                 }
                 string to_send = action + ";" + message;
                 byte[] data = Encoding.ASCII.GetBytes(to_send);
-                MessageBox.Show(Ip);
+                //MessageBox.Show(Ip);
                 sender.Send(data, data.Length, Ip, 12345);
             }
             catch (Exception e)
             {
-                //MessageBox.Show("Indirizzo ip errato! Controlla la sintassi dell'indirizzo immesso ricordandoti che un indirizzo IP è composto come NNN.NNN.NNN.NNN", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Indirizzo ip errato! Controlla la sintassi dell'indirizzo immesso ricordandoti che un indirizzo IP è composto come NNN.NNN.NNN.NNN", "ERRORE!", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show(e.Message);
             }
         }
 
@@ -234,16 +257,22 @@ namespace Pokemon
                     if (splitted_message[3] == "PARALIZZA")
                     {
                         MessageBox.Show("Paralizzato");
+                        getL().attacco_da_nemico('b');
+                        getL().rem_rec();
                         l.pScelto.p.isPar = true;
                     }
                     else if (splitted_message[3] == "SCOTTA")
                     {
                         MessageBox.Show("Scottato");
+                        getL().attacco_da_nemico('s');
+                        getL().rem_rec();
                         l.pScelto.b.isBurned = true;
                     }
                     else if (splitted_message[3] == "ADDORMENTA")
                     {
-                        MessageBox.Show("Addormento");
+                        MessageBox.Show("Addormentato");
+                        getL().attacco_da_nemico('a');
+                        getL().rem_rec();
                         l.pScelto.s.isSleep = true;
                     }
                     else if (splitted_message[3].Split(' ')[1] == "vita")

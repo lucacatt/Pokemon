@@ -92,5 +92,7 @@
         <Button x:Name="btn_ogg5" Content="" HorizontalAlignment="Left" Height="65" Margin="821,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg5_Click" FontWeight="Bold" FontSize="13"/>
         <Button x:Name="btn_ogg6" Content="" HorizontalAlignment="Left" Height="65" Margin="980,747,0,0" VerticalAlignment="Top" Width="112" Click="btn_ogg6_Click" FontWeight="Bold" FontSize="13"/>
         <Label x:Name="lbl_opp" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="44" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="825" FontSize="18" FontWeight="Bold" Background="#00000000" Margin="26,-2,0,0"/>
+        <Image x:Name="img_mossa" HorizontalAlignment="Left" Height="215" Margin="529,133,0,0" VerticalAlignment="Top" Width="180"/>
+        <Image x:Name="img_mossa_rec" HorizontalAlignment="Left" Height="215" Margin="209,243,0,0" VerticalAlignment="Top" Width="180"/>
     </Grid>
 </Window>

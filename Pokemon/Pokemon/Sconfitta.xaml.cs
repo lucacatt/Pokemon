@@ -20,6 +20,10 @@ namespace Pokemon
         public Sconfitta()
         {
             InitializeComponent();
+            Uri uri = new Uri(AppDomain.CurrentDomain.BaseDirectory + "lose.jpg");
+            BitmapImage img = new BitmapImage(uri);
+            ImageBrush brush = new ImageBrush(img);
+            this.Background = brush;
             Uri uri_b = new Uri(AppDomain.CurrentDomain.BaseDirectory + "home.png");
             BitmapImage img_b = new BitmapImage(uri_b);
             ImageBrush brush_b = new ImageBrush(img_b);

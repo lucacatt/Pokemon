@@ -1,0 +1,4 @@
+Prova;Vittoria;
+Prova1;Sconfitta;
+Prova2;Vittoria;
+2;Vittoria;

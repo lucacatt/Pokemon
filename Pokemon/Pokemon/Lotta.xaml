@@ -6,30 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokemon"
         mc:Ignorable="d"
-        Title="Lotta" Height="877" Width="1164">
+        Title="Lotta" Height="877" Width="1164"
+        xmlns:gif = "https://github.com/XamlAnimatedGif/XamlAnimatedGif">
     <Grid>
-        <ListBox x:Name="lb_squadra" HorizontalAlignment="Left" Height="334" Margin="884,118,0,0" VerticalAlignment="Top" Width="250" FontSize="18" SelectionChanged="lb_squadra_SelectionChanged"/>
-        <Label x:Name="lbl_pkm" Content="" HorizontalAlignment="Left" Height="47" Margin="884,66,0,0" VerticalAlignment="Top" Width="250"/>
-        <Button x:Name="btn_selez" Content="" HorizontalAlignment="Left" Height="51" Margin="904,458,0,0" VerticalAlignment="Top" Width="210" Cursor="Hand" Click="btn_selez_Click">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Transparent"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
         <Rectangle HorizontalAlignment="Center" Height="189" Margin="0,538,0,0" Stroke="Black" VerticalAlignment="Top" Width="1112" RadiusX="11" RadiusY="11"/>
         <Label Content="HP" HorizontalAlignment="Left" Margin="58,562,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="52" Height="41" FontSize="18"/>
         <Label Content="ATTACCO" HorizontalAlignment="Left" Margin="58,611,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="120" Height="42" FontSize="18"/>
@@ -94,5 +73,28 @@
         <Label x:Name="lbl_opp" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="44" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="825" FontSize="18" FontWeight="Bold" Background="#00000000" Margin="26,-2,0,0"/>
         <Image x:Name="img_mossa" HorizontalAlignment="Left" Height="215" Margin="529,133,0,0" VerticalAlignment="Top" Width="180"/>
         <Image x:Name="img_mossa_rec" HorizontalAlignment="Left" Height="215" Margin="209,243,0,0" VerticalAlignment="Top" Width="180"/>
+        <Rectangle HorizontalAlignment="Left" Height="488" Margin="857,45,0,0" Stroke="Black" VerticalAlignment="Top" Width="273" RadiusX="12" RadiusY="12"/>
+        <ListBox x:Name="lb_squadra" HorizontalAlignment="Left" Height="334" Margin="870,118,0,0" VerticalAlignment="Top" Width="250" FontSize="18" SelectionChanged="lb_squadra_SelectionChanged"/>
+        <Label x:Name="lbl_pkm" Content="" HorizontalAlignment="Left" Height="47" Margin="870,66,0,0" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="btn_selez" Content="" HorizontalAlignment="Left" Height="51" Margin="890,458,0,0" VerticalAlignment="Top" Width="210" Cursor="Hand" Click="btn_selez_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

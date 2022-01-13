@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucab\\Desktop\\Pokemon\\Pokemon\\Pokemon.csproj": {}
+    "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\Pokemon.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucab\\Desktop\\Pokemon\\Pokemon\\Pokemon.csproj": {
+    "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\Pokemon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucab\\Desktop\\Pokemon\\Pokemon\\Pokemon.csproj",
+        "projectUniqueName": "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\Pokemon.csproj",
         "projectName": "Pokemon",
-        "projectPath": "C:\\Users\\lucab\\Desktop\\Pokemon\\Pokemon\\Pokemon.csproj",
+        "projectPath": "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\Pokemon.csproj",
         "packagesPath": "C:\\Users\\lucab\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucab\\Desktop\\Pokemon\\Pokemon\\obj\\",
+        "outputPath": "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -41,6 +41,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "XamlAnimatedGif": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

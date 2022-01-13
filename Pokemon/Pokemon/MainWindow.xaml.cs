@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +71,10 @@ namespace Pokemon
             BitmapImage img_st = new BitmapImage(uri_st);
             ImageBrush brush_st = new ImageBrush(img_st);
             btnStats.Background = brush_st;
+            Uri uri_sc = new Uri(AppDomain.CurrentDomain.BaseDirectory + "scoreboard.png");
+            BitmapImage img_sc = new BitmapImage(uri_sc);
+            ImageBrush brush_sc = new ImageBrush(img_sc);
+            btnScores.Background = brush_sc;
         }
 
         private void btnIdietro_Click(object sender, RoutedEventArgs e)
@@ -96,7 +101,7 @@ namespace Pokemon
             bitmap.BeginInit();
             bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
             bitmap.EndInit();
-            pkm.Stretch = Stretch.Fill;
+            pkm.Stretch = Stretch.UniformToFill;
             pkm.StretchDirection = StretchDirection.Both;
             pkm.Source = bitmap;
         }
@@ -151,6 +156,12 @@ namespace Pokemon
             s.Show();
         }
 
+        private void btnScores_Click(object sender, RoutedEventArgs e)
+        {
+            score s = new score();
+            s.Show();
+        }
+
         private void btnRimuovi_Click(object sender, RoutedEventArgs e)
         {
             if (lb.SelectedIndex >= 0)
@@ -185,6 +196,12 @@ namespace Pokemon
             {
                 MessageBox.Show("Completa la squadra", "Impossibile continuare", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            score s = new score();
+            s.Show();
         }
     }
 }

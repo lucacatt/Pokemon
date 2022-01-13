@@ -32,6 +32,7 @@ namespace Pokemon
         int obj_5_rem;
         int obj_6_rem;
         int nTurno;
+        string nome_avversario;
 
         public Lotta(Pokemons pScelti)
         {
@@ -44,6 +45,7 @@ namespace Pokemon
             nTurno = 0;
             set_listbox();
             set_scenery();
+            nome_avversario = "";
         }
 
         public void set_nOpp(string nOpp)
@@ -51,119 +53,18 @@ namespace Pokemon
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
             {
                 lbl_opp.Content = "Stai giocando contro " + nOpp;
+                nome_avversario = nOpp;
             }));
         }
 
-        public void attacco_a_nemico(char controllo)
+        public void change_atk()
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
-            {
-                if (controllo == 'b')
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "bruciatura.png"), UriKind.Absolute);
-                    bitmap.EndInit();
-                    img_mossa.Stretch = Stretch.Fill;
-                    img_mossa.StretchDirection = StretchDirection.Both;
-                    img_mossa.Source = bitmap;
-                }
-                else if(controllo == 'a')
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "addormenta.png"), UriKind.Absolute);
-                    bitmap.EndInit();
-                    img_mossa.Stretch = Stretch.Fill;
-                    img_mossa.StretchDirection = StretchDirection.Both;
-                    img_mossa.Source = bitmap;
-                }
-                else if(controllo == 'p')
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "paralizza.png"), UriKind.Absolute);
-                    bitmap.EndInit();
-                    img_mossa.Stretch = Stretch.Fill;
-                    img_mossa.StretchDirection = StretchDirection.Both;
-                    img_mossa.Source = bitmap;
-                }
-            }));
+            lbl_atk_pkm.Content = pScelto.Atk;
         }
 
-        public void rem_atk()
+        public void change_def()
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
-            {
-                Thread.Sleep(3000);
-                img_mossa.Source = new BitmapImage();
-            }));
-        }
-
-        public void attacco_da_nemico(char controllo)
-        {
-            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
-            {
-                if (controllo == 'b')
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "bruciatura.png"), UriKind.Absolute);
-                    bitmap.EndInit();
-                    BitmapImage bitmap_pkm = new BitmapImage();
-                    bitmap_pkm.BeginInit();
-                    bitmap_pkm.UriSource = new Uri(pScelto.imgFront, UriKind.Absolute);
-                    bitmap_pkm.EndInit();
-                    img_pkm.Source = bitmap_pkm;
-                    img_mossa_rec.Stretch = Stretch.Fill;
-                    img_mossa_rec.StretchDirection = StretchDirection.Both;
-                    img_mossa_rec.Source = bitmap;
-                }
-                else if (controllo == 'a')
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "addormenta.png"), UriKind.Absolute);
-                    bitmap.EndInit();
-                    BitmapImage bitmap_pkm = new BitmapImage();
-                    bitmap_pkm.BeginInit();
-                    bitmap_pkm.UriSource = new Uri(pScelto.imgFront, UriKind.Absolute);
-                    bitmap_pkm.EndInit();
-                    img_pkm.Source = bitmap_pkm;
-                    img_mossa_rec.Stretch = Stretch.Fill;
-                    img_mossa_rec.StretchDirection = StretchDirection.Both;
-                    img_mossa_rec.Source = bitmap;
-                }
-                else if (controllo == 'p')
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri((AppDomain.CurrentDomain.BaseDirectory + "paralizza.png"), UriKind.Absolute);
-                    bitmap.EndInit(); 
-                    BitmapImage bitmap_pkm = new BitmapImage();
-                    bitmap_pkm.BeginInit();
-                    bitmap_pkm.UriSource = new Uri(pScelto.imgFront, UriKind.Absolute);
-                    bitmap_pkm.EndInit();
-                    img_pkm.Source = bitmap_pkm;
-                    img_mossa_rec.Stretch = Stretch.Fill;
-                    img_mossa_rec.StretchDirection = StretchDirection.Both;
-                    img_mossa_rec.Source = bitmap;
-                }
-            }));
-        }
-
-        public void rem_rec()
-        {
-            Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
-            {
-                Thread.Sleep(3000);
-                img_mossa_rec.Source = new BitmapImage();
-                BitmapImage bitmap_pkm = new BitmapImage();
-                bitmap_pkm.BeginInit();
-                bitmap_pkm.UriSource = new Uri(pScelto.imgBack, UriKind.Absolute);
-                bitmap_pkm.EndInit();
-                img_pkm.Source = bitmap_pkm;
-            }));
+            lbl_df_pkm.Content = pScelto.Def;
         }
 
         public void pkm_opp_received(Pokem pkm_opp, int pkm_remained)
@@ -190,7 +91,6 @@ namespace Pokemon
             }));
         }
 
-
         private void set_listbox()
         {
 
@@ -200,6 +100,7 @@ namespace Pokemon
                 pScelti.getPkm(i).Index = i;
             }
         }
+
         private void set_scenery()
         {
             Uri uri_p = new Uri(AppDomain.CurrentDomain.BaseDirectory + "la_tua_squadra.png");
@@ -391,7 +292,11 @@ namespace Pokemon
                             lbl_atk_pkm.Content = pScelto.Atk;
                             lbl_df_pkm.Content = pScelto.Def;
                             lbl_hp_pkm.Content = pScelto.Hp;
+                            pScelto.Index = i;
                             check_HP(pScelto.remHp, pScelto.Index);
+                            lbl_danno.Content = "";
+                            lbl_effetto.Content = "";
+                            lbl_tipo.Content = "";
                             lb_mosse.Items.Clear();
                             for (int j = 0; j < pScelti.getPkm(i).Mosse.Count; j++)
                             {
@@ -404,6 +309,10 @@ namespace Pokemon
                 else
                 {
                     comunicazione.send_packet("c", "p");
+                    scoreboard score = new scoreboard(nome_avversario, "Sconfitta");
+                    scoreboards s = new scoreboards();
+                    s.aggiungiScore(score);
+                    s.scrivi();
                     Sconfitta sconfitta = new Sconfitta();
                     Close();
                     sconfitta.Show();
@@ -586,7 +495,6 @@ namespace Pokemon
                     {
                         if (obj_3_rem > 0)
                         {
-                            //DA VEDERE EFFETTI
                             pScelto.remHp = pScelto.Hp;
                             obj_3_rem -= 1;
                             check_HP(pScelto.remHp, pScelto.Index);
@@ -625,7 +533,6 @@ namespace Pokemon
                             prg_hp_pkm.Value = pScelto.remHp;
                             lbl_hp_pkm.Content = pScelto.remHp;
                             bruciatura();
-                            //comunicazione.send_packet("p", pScelto + ";" + pScelto.remHp + ";" + "" + ";" + "");
                             comunicazione.send_packet("og", Objs.getobj(3).Nome + ";");
                         }
                         else

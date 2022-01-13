@@ -62,22 +62,6 @@ namespace Pokemon
                 if (action == "at")
                 {
                     turno = false;
-                    string[] msg = message.Split(";");
-                    if(msg[2] == "SCOTTA")
-                    {
-                        getL().attacco_a_nemico('b');
-                        getL().rem_atk();
-                    }
-                    else if(msg[2] == "ADDORMENTA")
-                    {
-                        getL().attacco_a_nemico('a');
-                        getL().rem_atk();
-                    }
-                    else if(msg[2] == "PARALIZZA")
-                    {
-                        getL().attacco_a_nemico('p');
-                        getL().rem_atk();
-                    }
                 }
                 if (action == "og")
                 {
@@ -257,22 +241,16 @@ namespace Pokemon
                     if (splitted_message[3] == "PARALIZZA")
                     {
                         MessageBox.Show("Paralizzato");
-                        getL().attacco_da_nemico('b');
-                        getL().rem_rec();
                         l.pScelto.p.isPar = true;
                     }
                     else if (splitted_message[3] == "SCOTTA")
                     {
                         MessageBox.Show("Scottato");
-                        getL().attacco_da_nemico('s');
-                        getL().rem_rec();
                         l.pScelto.b.isBurned = true;
                     }
                     else if (splitted_message[3] == "ADDORMENTA")
                     {
                         MessageBox.Show("Addormentato");
-                        getL().attacco_da_nemico('a');
-                        getL().rem_rec();
                         l.pScelto.s.isSleep = true;
                     }
                     else if (splitted_message[3].Split(' ')[1] == "vita")
@@ -310,13 +288,13 @@ namespace Pokemon
                 {
                     l.pOpp.remHp += 20;
                     l.change_progressOpponent(l.pOpp.remHp);
-                    MessageBox.Show("usata pozione");
+                    MessageBox.Show("L'avversario ha usato pozione");
                 }
                 else if (splitted_message[1] == "superpozione")
                 {
                     l.pOpp.remHp += 60;
                     l.change_progressOpponent(l.pOpp.remHp);
-                    MessageBox.Show("usata superpozione");
+                    MessageBox.Show("L'avversario ha usato superpozione");
                 }
                 else if (splitted_message[1] == "ricaricatotale")
                 {
@@ -328,17 +306,25 @@ namespace Pokemon
                     l.pScelto.s.isSleep = false;
                     l.pScelto.p.parCount = 5;
                     l.pScelto.p.isPar = false;
-                    MessageBox.Show("usata ricaricatotale");
+                    MessageBox.Show("L'avversario ha usato ricaricatotale");
                 }
                 else if (splitted_message[1] == "revitalizzante")
                 {
                     l.pOpp.remHp = l.pOpp.Hp / 2;
                     l.change_progressOpponent(l.pOpp.remHp);
-                    MessageBox.Show("usata revitalizzante");
+                    MessageBox.Show("L'avversario ha usato revitalizzante");
                 }
                 else if (splitted_message[1] == "proteina")
                 {
-                    MessageBox.Show("usata proteina");
+                    l.pScelto.Atk += 10;
+                    l.change_atk();
+                    MessageBox.Show("L'avversario ha usato proteina");
+                }
+                else if (splitted_message[1] == "ferro")
+                {
+                    l.pScelto.Def += 10;
+                    l.change_def();
+                    MessageBox.Show("L'avversario ha usato ferro");
                 }
             }
             else if (splitted_message[0] == "c")
@@ -346,6 +332,10 @@ namespace Pokemon
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
                     // chiusura partita esce vinto/perso
+                    scoreboard score = new scoreboard(c.Opponent, "Vittoria");
+                    scoreboards s = new scoreboards();
+                    s.aggiungiScore(score);
+                    s.scrivi();
                     Vittoria vittoria = new Vittoria();
                     l.Close();
                     vittoria.Show();

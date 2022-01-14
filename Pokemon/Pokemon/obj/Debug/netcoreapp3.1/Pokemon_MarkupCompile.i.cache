@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\LUCA\INFORMATICA\GitHub\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\
+E:\POKEMON SHOWDOWN\Pokemon\Pokemon\obj\Debug\netcoreapp3.1\
 Pokemon
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-D:\LUCA\INFORMATICA\GitHub\Pokemon\Pokemon\App.xaml
+E:\POKEMON SHOWDOWN\Pokemon\Pokemon\App.xaml
 7-643715089
 
 27-690110956
 1931677017454
 Lotta.xaml;MainWindow.xaml;Mostra_Squadra.xaml;Sconfitta.xaml;score.xaml;Statistiche.xaml;Vittoria.xaml;
 
-False
+True
 

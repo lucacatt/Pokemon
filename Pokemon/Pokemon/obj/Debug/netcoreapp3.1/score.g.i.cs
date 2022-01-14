@@ -101,7 +101,7 @@ namespace Pokemon {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Pokemon;V1.0.0.0;component/score.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Pokemon;component/score.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\score.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

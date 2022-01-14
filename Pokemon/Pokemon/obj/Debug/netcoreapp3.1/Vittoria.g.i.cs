@@ -61,7 +61,7 @@ namespace Pokemon {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Pokemon;V1.0.0.0;component/vittoria.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Pokemon;component/vittoria.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Vittoria.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

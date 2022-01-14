@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IL3byVYclmgrSuRC+NTTVsQLHYZoZS8jQ5w7SurbRc3tw8LqH8g3viGrLd7sLjnjsdCacIeiAVfjoPDE97PZuw==",
+  "dgSpecHash": "VrlmUIIH/8gYvIeTLlQLFB08eguMHyI7cF+MsxSN3lKZU4skBcTS4cj9elqunmicYoU37xdXZNlL67QwkjT46w==",
   "success": true,
-  "projectFilePath": "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\Pokemon.csproj",
+  "projectFilePath": "E:\\POKEMON SHOWDOWN\\Pokemon\\Pokemon\\Pokemon.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lucab\\.nuget\\packages\\xamlanimatedgif\\2.0.2\\xamlanimatedgif.2.0.2.nupkg.sha512"
   ],

@@ -48,11 +48,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\Pokemon.csproj",
+      "projectUniqueName": "E:\\POKEMON SHOWDOWN\\Pokemon\\Pokemon\\Pokemon.csproj",
       "projectName": "Pokemon",
-      "projectPath": "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\Pokemon.csproj",
+      "projectPath": "E:\\POKEMON SHOWDOWN\\Pokemon\\Pokemon\\Pokemon.csproj",
       "packagesPath": "C:\\Users\\lucab\\.nuget\\packages\\",
-      "outputPath": "D:\\LUCA\\INFORMATICA\\GitHub\\Pokemon\\Pokemon\\obj\\",
+      "outputPath": "E:\\POKEMON SHOWDOWN\\Pokemon\\Pokemon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

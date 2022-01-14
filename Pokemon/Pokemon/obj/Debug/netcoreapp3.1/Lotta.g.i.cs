@@ -302,7 +302,7 @@ namespace Pokemon {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Pokemon;V1.0.0.0;component/lotta.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Pokemon;component/lotta.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Lotta.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

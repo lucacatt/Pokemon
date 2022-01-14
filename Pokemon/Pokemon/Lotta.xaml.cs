@@ -223,33 +223,41 @@ namespace Pokemon
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new ThreadStart(() =>
             {
-                if (comunicazione.getTurno() == true)
+                if(pOpp != new Pokem())
                 {
-                    effetto();
-                    try
+                    if (comunicazione.getTurno() == true)
                     {
-                        if (mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[1] == "difesa")
+                        effetto();
+                        try
                         {
-                            float temp = (float)pScelto.Def / 100 * Convert.ToInt32(mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[0].Substring(1, 2));
-                            pScelto.Def += (int)temp;
-                            lbl_df_pkm.Content = pScelto.Def;
-                            MessageBox.Show("difesa aumentata");
+                            if (mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[1] == "difesa")
+                            {
+                                float temp = (float)pScelto.Def / 100 * Convert.ToInt32(mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[0].Substring(1, 2));
+                                pScelto.Def += (int)temp;
+                                lbl_df_pkm.Content = pScelto.Def;
+                                MessageBox.Show("difesa aumentata");
+                            }
+                            else if (mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[1] == "attacco")
+                            {
+                                MessageBox.Show("attacco aumentato");
+                                float temp = pScelto.Atk / 100 * Convert.ToInt32(mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[0].Substring(1, 2));
+                                pScelto.Atk += (int)temp;
+                                lbl_atk_pkm.Content = pScelto.Atk;
+                            }
                         }
-                        else if (mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[1] == "attacco")
+                        catch
                         {
-                            MessageBox.Show("attacco aumentato");
-                            float temp = pScelto.Atk / 100 * Convert.ToInt32(mosse[lb_mosse.SelectedIndex].effetto.Split(' ')[0].Substring(1, 2));
-                            pScelto.Atk += (int)temp;
-                            lbl_atk_pkm.Content = pScelto.Atk;
-                        }
-                    }
-                    catch
-                    {
 
+                        }
                     }
+                    else
+                        MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
-                    MessageBox.Show("Aspetta il tuo turno!", "Aspetta!", MessageBoxButton.OK, MessageBoxImage.Error);
+                {
+                    MessageBox.Show("Aspetta che l'avversario scelga il suo Pokémon", "Aspetta", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                
             }));
         }
         public void change_progress(int hp)
@@ -602,7 +610,8 @@ namespace Pokemon
             {
                 if (!pScelto.p.isPar)
                 {
-                    comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
+                    int danno = pScelto.Atk * mosse[lb_mosse.SelectedIndex].danno;
+                    comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
                 }
                 else
                 {
@@ -610,7 +619,8 @@ namespace Pokemon
                     int perc = rnd.Next(1, 100);
                     if (perc > 25)
                     {
-                        comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + mosse[lb_mosse.SelectedIndex].danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
+                        int danno = pScelto.Atk * mosse[lb_mosse.SelectedIndex].danno;
+                        comunicazione.send_packet("at", mosse[lb_mosse.SelectedIndex].nome + ";" + danno + ";" + mosse[lb_mosse.SelectedIndex].effetto + ";" + mosse[lb_mosse.SelectedIndex].tipo.nome + ";");
                         pScelto.p.parCount--;
                     }
                     else

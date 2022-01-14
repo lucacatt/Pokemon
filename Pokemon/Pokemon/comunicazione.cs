@@ -89,7 +89,7 @@ namespace Pokemon
 
         public void receive_packet()
         {
-            UdpClient receiver = new UdpClient(12346);
+            UdpClient receiver = new UdpClient(12345);
             IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
             byte[] dataReceived = receiver.Receive(ref riceveEP);
             string messaggio_ricevuto = Encoding.ASCII.GetString(dataReceived);
@@ -99,7 +99,7 @@ namespace Pokemon
         {
             try
             {
-                UdpClient listener = new UdpClient(12346);
+                UdpClient listener = new UdpClient(12345);
                 IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
                 while (c.Received_message == "")
                 {
@@ -222,9 +222,12 @@ namespace Pokemon
                 // attacco (nome mossa, danno, effetto)
                 c.Received_message = "";
                 double molt = calcoloDanno(splitted_message[4]);
-                int danno = (int)(42 * (l.pOpp.Atk * Convert.ToInt32(splitted_message[2]) / l.pScelto.Def) / 50 * molt);
+                int danno = (int)(42 * (Convert.ToInt32(splitted_message[2]) / l.pScelto.Def) / 50 * molt);
+                if (danno == 0)
+                    MessageBox.Show("Danno Inefficace, il Pokémon è immune all'attacco inflitto", "Immune", MessageBoxButton.OK, MessageBoxImage.Information);
                 int temp = (l.pScelto.remHp - danno);
                 if (temp <= 0)
+
                 {
                     l.pScelto.remHp = 0;
                     l.pkLeft--;
@@ -275,7 +278,7 @@ namespace Pokemon
                 }
                 else
                 {
-                    l.pOpp.remHp = temp;
+                      l.pOpp.remHp = temp;
                     l.change_progressOpponent(l.pOpp.remHp);
                 }
             }
@@ -348,6 +351,7 @@ namespace Pokemon
             Thread thread = new Thread(new ThreadStart(thread_listen_port));
             thread.Start();
         }
+
         public double calcoloDanno(string tipo)
         {
             double multiplier = 1.0;
